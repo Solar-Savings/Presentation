@@ -38,16 +38,7 @@
           <label for="yearsRange">Years <span id="yearsDisplay">25</span></label>
           <input type="range" id="yearsRange" min="10" max="30" value="25" />
         </div>
-        <div class="form-group">
-          <label for="utilityEsc">Utility escalator (annual)</label>
-          <select id="utilityEsc">
-            <option value="0.07">7%</option>
-            <option value="0.08">8%</option>
-            <option value="0.09" selected>9%</option>
-            <option value="0.10">10%</option>
-            <option value="0.12">12%</option>
-          </select>
-        </div>
+        <input type="hidden" id="utilityEsc" value="0.09">
         <div class="form-group">
           <label for="solarEsc">Solar escalator</label>
           <select id="solarEsc">
