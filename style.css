@@ -1,0 +1,205 @@
+/*
+ * Stylesheet for the Solar Savings Calculator presentation site.
+ *
+ * The design keeps a clean, modern aesthetic with muted green
+ * accents reminiscent of sustainable energy.  The calculator sits
+ * prominently at the top of the page with utility company logos,
+ * while the remainder of the page showcases the presentation
+ * slides one after another.  Spacing, typography and colours
+ * are tuned for comfortable reading on both desktop and mobile.
+ */
+
+/* Root colour palette */
+:root {
+  --bg-light: #f6faf7;
+  --bg-alt: #edf7f1;
+  --text-primary: #0f3427;
+  --text-secondary: #3f5c52;
+  --brand-green: #00945e;
+  --result-bg: #ffffff;
+  --result-border: #dfe8e2;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Global resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+}
+
+/* Container for consistent horizontal padding */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Calculator section */
+.calculator-section {
+  padding: 40px 0;
+  background-color: var(--bg-light);
+}
+
+.page-title {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* Logos aligned horizontally */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.utility-logo {
+  height: 60px;
+  object-fit: contain;
+}
+
+/* Form layout */
+.calc-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid var(--result-border);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.form-group input[type="range"] {
+  padding: 0;
+}
+
+.form-group.full-row {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+.btn {
+  padding: 12px 20px;
+  background-color: var(--brand-green);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #007a52;
+}
+
+/* Results summary */
+.results-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.result-box {
+  flex: 1 1 200px;
+  background-color: var(--result-bg);
+  border: 1px solid var(--result-border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+}
+
+.result-box.savings {
+  background-color: #e8f6ef;
+  border-color: #c7e9d6;
+}
+
+.result-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.result-value {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* Chart wrapper so the canvas scales properly */
+.chart-wrapper {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--result-border);
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: var(--card-shadow);
+}
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+/* Slides section */
+.slides {
+  padding: 40px 0;
+}
+
+.slide {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 1.8rem;
+  }
+  .utility-logo {
+    height: 48px;
+  }
+}
