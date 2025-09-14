@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solar Savings Calculator</title>
+  <!-- Link to the custom stylesheet for layout and styling -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!--
+    The calculator section occupies the top of the page.  It displays
+    the title and utility company logos, followed by the input form,
+    results summary and a comparison chart.  This closely mirrors
+    the original solar savings calculator while removing any extra
+    navigation or menu elements.  Only the calculator content
+    appears above the fold.
+  -->
+  <section class="calculator-section">
+    <div class="container">
+      <h1 class="page-title">Solar Savings Calculator</h1>
+      <!-- Utility company logos -->
+      <div class="logo-container">
+        <img src="cmp.png" alt="Central Maine Power logo" class="utility-logo" />
+        <img src="versant.png" alt="Versant Power logo" class="utility-logo" />
+      </div>
+      <!-- Calculator form -->
+      <form id="calcForm" class="calc-form" onsubmit="return false;">
+        <div class="form-group">
+          <label for="bill">Monthly utility bill ($)</label>
+          <input type="number" id="bill" min="0" step="1" placeholder="e.g., 180" />
+        </div>
+        <div class="form-group">
+          <label for="solarPayment">Solar monthly payment ($)</label>
+          <input type="number" id="solarPayment" min="0" step="1" placeholder="e.g., 135" />
+        </div>
+        <div class="form-group">
+          <label for="yearsRange">Years <span id="yearsDisplay">25</span></label>
+          <input type="range" id="yearsRange" min="10" max="30" value="25" />
+        </div>
+        <div class="form-group">
+          <label for="utilityEsc">Utility escalator (annual)</label>
+          <select id="utilityEsc">
+            <option value="0.07">7%</option>
+            <option value="0.08">8%</option>
+            <option value="0.09" selected>9%</option>
+            <option value="0.10">10%</option>
+            <option value="0.12">12%</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="solarEsc">Solar escalator</label>
+          <select id="solarEsc">
+            <option value="0.00">0% (fixed)</option>
+            <option value="0.01">1%</option>
+            <option value="0.014">1.4%</option>
+            <option value="0.02">2%</option>
+            <option value="0.029" selected>2.9%</option>
+          </select>
+        </div>
+        <div class="form-group full-row">
+          <button id="runBtn" class="btn" type="button">Calculate</button>
+        </div>
+      </form>
+      <!-- Results summary -->
+      <div class="results-summary">
+        <div class="result-box">
+          <span class="result-label">Total Utility Cost</span>
+          <span id="utilTotal" class="result-value">0</span>
+        </div>
+        <div class="result-box">
+          <span class="result-label">Total Solar Cost</span>
+          <span id="solarTotal" class="result-value">0</span>
+        </div>
+        <div class="result-box savings">
+          <span class="result-label">Lifetime Savings</span>
+          <span id="savings" class="result-value">0</span>
+        </div>
+      </div>
+      <!-- Chart container -->
+      <div class="chart-wrapper">
+        <canvas id="savingsChart" width="800" height="350" aria-label="Savings comparison chart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slides follow below the calculator in the order provided -->
+  <section class="slides">
+    <div class="slide"><img src="pdf_page_2.png" alt="Company overview slide" /></div>
+    <div class="slide"><img src="pdf_page_3.png" alt="Installation map slide" /></div>
+    <div class="slide"><img src="pdf_page_4.png" alt="Partners slide" /></div>
+    <div class="slide"><img src="pdf_page_6.png" alt="PPA slide" /></div>
+    <div class="slide"><img src="pdf_page_11.png" alt="Options comparison slide" /></div>
+    <div class="slide"><img src="pdf_page_13.png" alt="Reasons to go solar slide" /></div>
+    <div class="slide"><img src="pdf_page_14.png" alt="Rate trends slide" /></div>
+    <div class="slide"><img src="pdf_page_15.png" alt="Rate hike news slide" /></div>
+    <div class="slide"><img src="pdf_page_16.png" alt="Why rates rise slide" /></div>
+    <div class="slide"><img src="pdf_page_17.png" alt="FAQ slide" /></div>
+    <div class="slide"><img src="pdf_page_18.png" alt="Solar in snow slide" /></div>
+    <div class="slide"><img src="program_details_summary_final2.png" alt="Program details summary" /></div>
+  </section>
+
+  <!-- Link to the calculator logic -->
+  <script src="script.js"></script>
+</body>
+</html>
