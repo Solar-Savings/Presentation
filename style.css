@@ -47,7 +47,7 @@ input[type="range"]::-moz-range-thumb{
 .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:0 8px 18px rgba(0,0,0,.06)}
 .card-title{color:var(--muted);margin-bottom:6px}
 .card-value{font-size:clamp(24px,5vw,36px);font-weight:800}
-.card.savings{background:#edf8f2}
+.card-savings{background:#edf8f2}
 
 /* Yearly Snapshot */
 .snapshot-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;margin:0 0 16px;box-shadow:0 8px 18px rgba(0,0,0,.05)}
