@@ -1,41 +1,36 @@
-:root{
-  --green:#0a8a5a;
-  --green-dark:#0f3427;
-  --bg:#f4faf6;
-  --panel:#ffffff;
-  --border:#d7e3dd;
-  --muted:#5e6e66;
+/* General body */
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--green-dark);
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+/* Headings */
+h1, h2, h3 {
+  color: #222;
+  font-weight: 600;
+  margin: 20px 0;
+}
 
-.container{max-width:1100px;margin:0 auto;padding:0 16px}
+h1 {
+  font-size: 2rem;
+}
 
-/* Hero */
-.hero{background:linear-gradient(180deg,#0b8a5a 0%, #0a7b52 100%);color:#fff;padding:28px 0 22px}
-.hero h1{margin:0 0 6px;font-size:clamp(28px,5vw,44px)}
-.tagline{margin:0 0 14px;opacity:.95}
-.logos{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
-.logos img{height:56px;width:auto;background:#fff;border-radius:8px;padding:6px 10px;box-shadow:0 6px 14px rgba(0,0,0,.15)}
+/* Buttons */
+.btn {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  padding: 13px 14px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-/* Form */
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0}
-.field{display:flex;flex-direction:column;gap:6px}
-.field.full{grid-column:1/-1}
-label{font-size:.95rem;color:#204238}
-input,select{padding:12px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:#0f3427}
-
-.btn{background:var(--green);color:#fff;border:none;padding:13px 14px;border-radius:10px;font-weight:700;cursor:pointer}
-.btn:hover{filter:brightness(.95)}
-
-/* Put timeline + solar escalator on one row */
-.row-advanced{
-  display:grid;
-  grid-template-columns: 2fr 1fr; /* slider gets 2x width of dropdown */
-  gap:18px;
-  align-items:end; /* bottoms line up */
+.btn:hover {
+  filter: brightness(.95);
 }
 
 /* Slider bigger - original */
@@ -79,87 +74,49 @@ input[type="range"]::-moz-range-thumb {
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-/* Keep labels tight and consistent */
-.row-advanced label{
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  font-weight:600;
-}
-#yearsDisplay{ font-weight:700; }
-
-/* Mobile: stack neatly */
-@media (max-width: 700px){
-  .row-advanced{
-    grid-template-columns: 1fr;
-    
-/* stack */
-input[type="range"]::-moz-range-track{height:10px;background:#dce9e3;border-radius:8px}
-input[type="range"]::-moz-range-thumb{
-  width:28px;height:28px;border-radius:50%;background:var(--green);border:none;box-shadow:0 2px 6px rgba(0,0,0,.2)
+/* Totals box styling */
+.snap-label {
+  font-size: 0.9rem;
+  color: #666;
 }
 
-/* Totals */
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:10px 0 16px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:0 8px 18px rgba(0,0,0,.06)}
-.card-title{color:var(--muted);margin-bottom:6px}
-.card-value{font-size:clamp(24px,5vw,36px);font-weight:800}
-.card.savings{background:#edf8f2}
+.snap-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #222;
+}
 
-/* Yearly Snapshot */
-.snapshot-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;margin:0 0 16px;box-shadow:0 8px 18px rgba(0,0,0,.05)}
-.snapshot-head{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
-.snapshot-year{font-weight:900;font-size:clamp(22px,5vw,28px);color:#0f3427}
-.snapshot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:center}
-.snap-label{color:#5e6e66}
-.snap-value{font-weight:700}
-
-/* ⭐ Reviews collage */
-/* === Reviews layout (no cropping, reads full names) === */
+/* Reviews grid */
 .reviews {
-  padding: 20px 0 10px;
+  background: #f9f9f9;
+  padding: 40px 20px;
 }
 
-.reviews-title { margin: 0 20px 4px; }
-.reviews-sub   { margin: 0 20px 18px; color:#5a6a63; }
-
-.reviews-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(520px,1fr)); /* bigger cells */
-  gap:10px;
-  padding: 0 16px 24px;
-  max-width:1200px;
-  margin:0 auto;
+.reviews-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-/* kill any old sizing that could crop */
-.reviews-grid .rev{ margin:0; }
-.reviews-grid img{
-  display:block;
-  width:100%;       /* fill the cell width */
-  height:auto;      /* keep natural height */
-  object-fit:contain; /* never crop */
-  border-radius:12px;
-  box-shadow:0 6px 14px rgba(0,0,0,.16);
+.reviews-sub {
+  color: #666;
+  margin-bottom: 30px;
 }
 
-/* Phone: show one per row so everything is readable */
-@media (max-width:700px){
-  .reviews-grid{
-    grid-template-columns:1fr;   /* stack vertically */
-    gap:18px;
-  }
-  .reviews-grid img{
-    max-width: 100%;
-  }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
 }
 
-/* Slides */
-.slides{padding:18px 0;background:#f7fbf8}
-.slide{max-width:1100px;margin:0 auto 16px;background:#fff;border-radius:10px;border:1px solid var(--border);
-  box-shadow:0 6px 16px rgba(0,0,0,.04);overflow:hidden}
-.slide img{width:100%;display:block}
+.reviews-grid img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: transform 0.2s;
+}
 
-/* How-it-works */
-#how-it-works .explain{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;margin:14px 0 28px}
-#how-it-works .muted{color:var(--muted)}
+.reviews-grid img:hover {
+  transform: scale(1.05);
+}
