@@ -31,17 +31,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Chart
   function drawChart(utilY, solarY){
-    // size to container width (crisp)
-    const parentW = canvas.parentElement.getBoundingClientRect().width;
-    canvas.width = Math.max(760, Math.round(parentW));
-    canvas.height = 380;
+  // --- responsive canvas sizing (crisp on mobile/retina) ---
+  const dpr = window.devicePixelRatio || 1;
+  const parent = canvas.parentElement;
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    const pad = {l:60,r:20,t:24,b:44}, w=canvas.width, h=canvas.height;
-    const N = utilY.length;
-    const maxV = Math.max(...utilY, ...solarY, 1) * 1.08;
-    const xStep = N>1 ? (w - pad.l - pad.r)/(N-1) : 0;
-    const yUnit = (h - pad.t - pad.b)/maxV;
+  // CSS size of the canvas (what you see)
+  const cssW = Math.max(320, Math.round(parent.getBoundingClientRect().width));
+  const cssH = Math.round(cssW * 0.38); // ~38% aspect; tweak to taste
+
+  // Apply CSS size
+  canvas.style.width  = cssW + 'px';
+  canvas.style.height = cssH + 'px';
+
+  // Internal bitmap size (for sharp rendering)
+  canvas.width  = Math.floor(cssW * dpr);
+  canvas.height = Math.floor(cssH * dpr);
+
+  // Draw using CSS pixel coordinates
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, cssW, cssH);
+
+  // ---- from here on, use cssW / cssH instead of canvas.width/height ----
+  const pad = { l: 60, r: 20, t: 24, b: 44 };
+  const w = cssW, h = cssH;
+  const N = utilY.length;
+  const maxV = Math.max(...utilY, ...solarY, 1) * 1.08;
+  const xStep = N > 1 ? (w - pad.l - pad.r) / (N - 1) : 0;
+  const yUnit = (h - pad.t - pad.b) / maxV;
+
+  // ... rest of your drawing code stays the same ...
+}
 
     // axes + grid
     ctx.strokeStyle = '#cfdad4'; ctx.lineWidth=1;
