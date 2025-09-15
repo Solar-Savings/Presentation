@@ -1,169 +1,164 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Solar Savings Calculator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="hero">
-    <div class="container hero__inner">
-      <div class="hero__text">
-        <h1>Solar Savings Calculator</h1>
-        <p class="sub">See how switching to solar can reduce your electricity costs over time.</p>
-      </div>
-      <div class="hero__logos">
-        <img src="versant.png" alt="Versant Power logo" class="utility-logo" />
-        <img src="cmp.png" alt="CMP logo" class="utility-logo" />
+    <div class="container">
+      <h1 class="title">Solar Savings Calculator</h1>
+      <p class="subtitle">See how switching to solar can reduce your electricity costs over time.</p>
+      <div class="logos">
+        <img src="versant.png" alt="Versant Power logo" />
+        <img src="cmp.png" alt="CMP logo" />
       </div>
     </div>
   </header>
 
-  <main>
-    <!-- ================== Calculator ================== -->
-    <section class="section">
-      <div class="container">
-        <form id="calcForm" class="form-grid" onsubmit="return false;">
-          <div class="form-group">
-            <label for="bill">Monthly utility bill ($)</label>
-            <input id="bill" type="number" min="0" step="1" placeholder="e.g., 180">
-          </div>
+  <main class="container">
 
-          <div class="form-group">
-            <label for="solarPayment">Monthly solar payment ($)</label>
-            <input id="solarPayment" type="number" min="0" step="1" placeholder="e.g., 135">
-          </div>
+    <!-- Calculator -->
+    <section class="card">
+      <form id="calcForm" class="form-grid" onsubmit="return false;">
+        <div class="field">
+          <label for="bill">Monthly utility bill ($)</label>
+          <input id="bill" type="number" min="0" step="1" placeholder="e.g., 180" />
+        </div>
 
-          <div class="form-group years">
-            <label for="yearsRange">Timeline (years): <span id="yearsDisplay">25</span></label>
+        <div class="field">
+          <label for="solarPayment">Monthly solar payment ($)</label>
+          <input id="solarPayment" type="number" min="0" step="1" placeholder="e.g., 135" />
+        </div>
+
+        <div class="field">
+          <label>Timeline (years): <span id="yearsDisplay">25</span></label>
+          <!-- this wrapper ensures the slider never overflows -->
+          <div class="range-wrap">
             <input id="yearsRange" type="range" min="1" max="30" value="25" />
           </div>
-
-          <!-- Hidden, fixed 9% annual utility increase -->
-          <input id="utilityEsc" type="hidden" value="0.09" />
-
-          <div class="form-group">
-            <label for="solarEsc">Solar escalator (PPA/lease rate increase)</label>
-            <select id="solarEsc">
-              <option value="0.00">0% (fixed)</option>
-              <option value="0.0199">1.99% per year</option>
-              <option value="0.0299" selected>2.99% per year</option>
-              <option value="0.0359">3.59% per year</option>
-            </select>
-          </div>
-
-          <div class="form-group full">
-            <button id="runBtn" class="btn" type="button">Calculate</button>
-          </div>
-        </form>
-
-        <div class="totals">
-          <div class="card">
-            <div class="label">Total Utility Cost</div>
-            <div id="utilTotal" class="value" aria-live="polite">$0</div>
-          </div>
-          <div class="card">
-            <div class="label">Total Solar Cost</div>
-            <div id="solarTotal" class="value" aria-live="polite">$0</div>
-          </div>
-          <div class="card">
-            <div class="label">Total Utility Bill Savings</div>
-            <div id="savings" class="value" aria-live="polite">$0</div>
-          </div>
         </div>
 
-        <!-- Snapshot -->
-        <article class="snapshot card">
-          <header class="snapshot__head">
-            <h3><span class="snap-year" id="snapYear">Year 25</span> <span class="snap-badge">Snapshot</span></h3>
-          </header>
-          <div class="snapshot__grid">
-            <div class="snap-item">
-              <div class="snap-label">Monthly utility</div>
-              <div class="snap-value" id="selMonthlyUtil">$0</div>
-            </div>
-            <div class="snap-item">
-              <div class="snap-label">Monthly solar</div>
-              <div class="snap-value" id="selMonthlySolar">$0</div>
-            </div>
-            <div class="snap-item">
-              <div class="snap-label">Monthly savings</div>
-              <div class="snap-value" id="selMonthlySavings">$0</div>
-            </div>
-            <div class="snap-item">
-              <div class="snap-label">Annual savings</div>
-              <div class="snap-value" id="selAnnualSavings">$0</div>
-            </div>
-          </div>
-        </article>
+        <!-- fixed 9% utility escalator (hidden) -->
+        <input id="utilityEsc" type="hidden" value="0.09" />
+
+        <div class="field span-2">
+          <label for="solarEsc">Solar escalator (PPA/lease rate increase)</label>
+          <select id="solarEsc">
+            <option value="0.0299" selected>2.99% per year</option>
+            <option value="0.0359">3.59% per year</option>
+            <option value="0.0199">1.99% per year</option>
+            <option value="0">0% (fixed)</option>
+          </select>
+        </div>
+
+        <div class="actions span-3">
+          <button id="runBtn" class="btn" type="button">Calculate</button>
+        </div>
+      </form>
+
+      <!-- Totals -->
+      <div class="totals">
+        <div class="total card-lite">
+          <div class="total-label">Total Utility Cost</div>
+          <div id="utilTotal" class="total-value">0</div>
+        </div>
+        <div class="total card-lite">
+          <div class="total-label">Total Solar Cost</div>
+          <div id="solarTotal" class="total-value">0</div>
+        </div>
+        <div class="total card-lite">
+          <div class="total-label">Total Utility Bill Savings</div>
+          <div id="savings" class="total-value">0</div>
+        </div>
       </div>
-    </section>
 
-    <!-- ================== Reviews ================== -->
-    <section class="section reviews">
-      <div class="container">
-        <h2>What local homeowners are saying</h2>
-        <p class="reviews-sub">Independent public feedback from real customers.</p>
+      <!-- Snapshot -->
+      <div class="snapshot card-lite">
+        <div class="snap-header">
+          <h2 class="snap-year">Year <span id="snapYear">25</span></h2>
+          <span class="snap-tag">Snapshot</span>
+        </div>
 
-        <div class="reviews-grid">
-          <figure class="rev"><img src="review_brad.jpg" alt="Brad Rock review" /></figure>
-          <figure class="rev"><img src="review_tammy.jpg" alt="Tammy Sterling review" /></figure>
-          <figure class="rev"><img src="review_leslie.jpg" alt="Leslie review" /></figure>
-          <figure class="rev"><img src="review_juan.jpg" alt="Juan Lua review" /></figure>
-          <figure class="rev"><img src="review_harvey.jpg" alt="Harvey Lua review" /></figure>
-          <figure class="rev"><img src="review_cilvia.jpg" alt="Cilvia Ornelas review" /></figure>
-          <figure class="rev"><img src="review_carolyn.jpg" alt="Carolyn Lindberg review" /></figure>
-          <figure class="rev"><img src="review_terri.jpg" alt="Terri Wanland review" /></figure>
+        <div class="snap-rows">
+          <div class="row">
+            <span class="label">Monthly utility</span>
+            <span id="selMonthlyUtility" class="value">$0.00</span>
+          </div>
+          <div class="row">
+            <span class="label">Monthly solar</span>
+            <span id="selMonthlySolar" class="value">$0.00</span>
+          </div>
+          <div class="row">
+            <span class="label">Monthly savings</span>
+            <span id="selMonthlySavings" class="value">$0.00</span>
+          </div>
+          <div class="row">
+            <span class="label">Annual savings</span>
+            <span id="selAnnualSavings" class="value">$0.00</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ================== Slides ================== -->
-    <section class="section">
-      <div class="container slides">
-        <img src="pdf_page_2.png"  alt="Company overview" />
-        <img src="pdf_page_3.png"  alt="Install map" />
-        <img src="pdf_page_4.png"  alt="Partners" />
-        <img src="pdf_page_6.png"  alt="PPA overview" />
-        <img src="pdf_page_11.png" alt="Options comparison" />
-        <img src="pdf_page_13.png" alt="Reasons" />
-        <img src="pdf_page_14.png" alt="Rate trends" />
-        <img src="pdf_page_15.png" alt="Rate hike news" />
-        <img src="pdf_page_16.png" alt="Why rates rise" />
-        <img src="pdf_page_17.png" alt="FAQ" />
-        <img src="pdf_page_18.png" alt="Solar in snow" />
-        <img src="IMG_1359.jpeg" alt="Client install 1" />
-        <img src="IMG_1920.jpeg" alt="Electrical work 1" />
-        <img src="IMG_6212.jpeg" alt="Electrical work 2" />
-        <img src="program_details_summary_final2.png" alt="Program details summary" />
+    <!-- Reviews collage -->
+    <section class="reviews">
+      <h2 class="section-title">What local homeowners are saying</h2>
+      <p class="section-kicker">Independent public feedback from real customers.</p>
+
+      <div class="reviews-grid">
+        <figure class="rev"><img src="review_brad.jpg" alt="Review from Brad" /></figure>
+        <figure class="rev"><img src="review_tammy.jpg" alt="Review from Tammy" /></figure>
+        <figure class="rev"><img src="review_leslie.jpg" alt="Review from Leslie" /></figure>
+        <figure class="rev"><img src="review_juan.jpg" alt="Review from Juan" /></figure>
+        <figure class="rev"><img src="review_harvey.jpg" alt="Review from Harvey" /></figure>
+        <figure class="rev"><img src="review_cilvia.jpg" alt="Review from Cilvia" /></figure>
+        <figure class="rev"><img src="review_carolyn.jpg" alt="Review from Carolyn" /></figure>
+        <figure class="rev"><img src="review_terri.jpg" alt="Review from Terri" /></figure>
       </div>
     </section>
 
-    <!-- ================== Disclosure ================== -->
-    <section class="section">
-      <div class="container">
-        <article class="disclosure card">
-          <h3>How these estimates work</h3>
-          <p>
-            This comparison illustrates how a household’s electricity expenses may change over time when
-            remaining on standard utility service versus selecting a solar power option. The starting utility
-            bill and solar payment are held constant, then a conservative annual adjustment is applied to reflect
-            typical changes in rates over time.
-          </p>
-          <ul>
-            <li>Utility costs are projected using a 9% annual adjustment based on long-term price trends for the region.</li>
-            <li>Many solar agreements include a modest annual adjustment. For reference, fixed escalators near 2.99% or 3.59% per year are common; choose the option that best matches your offer.</li>
-            <li>Use the timeline to review 1–30 years of expected cost exposure.</li>
-          </ul>
-          <p class="muted">
-            Figures shown are estimates for bill-to-bill comparison. Actual results may vary by usage, taxes, fees,
-            and site conditions. Production and system upkeep are not reflected here. Please review your documentation
-            for complete terms. © 2025 Residential Cost Comparison Tool.
-          </p>
-        </article>
-      </div>
+    <!-- Slides (images stacked) -->
+    <section class="slides">
+      <img src="pdf_page_2.png"  alt="Company overview" />
+      <img src="pdf_page_3.png"  alt="Install map" />
+      <img src="pdf_page_4.png"  alt="Partners" />
+      <img src="pdf_page_6.png"  alt="PPA explainer" />
+      <img src="pdf_page_11.png" alt="Options" />
+      <img src="pdf_page_13.png" alt="Reasons to go solar" />
+      <img src="pdf_page_14.png" alt="Rate trends" />
+      <img src="pdf_page_15.png" alt="Rate hike news" />
+      <img src="pdf_page_16.png" alt="Why rates rise" />
+      <img src="pdf_page_17.png" alt="FAQ" />
+      <img src="pdf_page_18.png" alt="Solar in snow" />
+      <img src="IMG_1359.jpeg" alt="Client install" />
+      <img src="IMG_2445.jpeg" alt="Client install" />
+      <img src="IMG_1920.jpeg" alt="Electrical work" />
+      <img src="IMG_6212.jpeg" alt="Electrical work" />
+      <img src="program_details_summary_final2.png" alt="Program details summary" />
     </section>
+
+    <!-- How these estimates work -->
+    <section class="disclaimer card">
+      <h3>How these estimates work</h3>
+      <p>
+        This comparison illustrates how a household’s electricity costs can change over time when staying on standard utility
+        service versus choosing a solar power option. The starting utility bill and solar payment are held constant, then a
+        typical annual adjustment is applied to reflect changes in rates over time.
+      </p>
+      <ul>
+        <li>Utility costs are projected using a conservative <strong>9% annual adjustment</strong> based on long-term price trends for the region.</li>
+        <li>Many solar agreements include a modest annual escalator. For reference, fixed escalators around <strong>2.99%</strong> or <strong>3.59%</strong> per year are common—choose the option that matches your proposal.</li>
+        <li>Use the timeline to review <strong>1–30 years</strong> of expected cost exposure.</li>
+      </ul>
+      <p class="fine">
+        Figures shown are bill-to-bill estimates. Actual results may vary by usage, taxes, fees, and site conditions. Production and system upkeep are not reflected here.
+        Please review your documentation for complete terms. © 2025 Residential Cost Comparison Tool.
+      </p>
+    </section>
+
   </main>
 
   <script src="script.js"></script>
