@@ -1,165 +1,121 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Solar Savings Calculator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="hero">
+  <!-- Calculator -->
+  <section class="calculator-section">
     <div class="container">
-      <h1 class="title">Solar Savings Calculator</h1>
-      <p class="subtitle">See how switching to solar can reduce your electricity costs over time.</p>
-      <div class="logos">
-        <img src="versant.png" alt="Versant Power logo" />
-        <img src="cmp.png" alt="CMP logo" />
+      <h1 class="page-title">Solar Savings Calculator</h1>
+      <div class="logo-container">
+        <img src="cmp.png" alt="Central Maine Power logo" class="utility-logo" />
+        <img src="versant.png" alt="Versant Power logo" class="utility-logo" />
       </div>
-    </div>
-  </header>
 
-  <main class="container">
-
-    <!-- Calculator -->
-    <section class="card">
-      <form id="calcForm" class="form-grid" onsubmit="return false;">
-        <div class="field">
+      <form id="calcForm" class="calc-form" onsubmit="return false;">
+        <div class="form-group">
           <label for="bill">Monthly utility bill ($)</label>
-          <input id="bill" type="number" min="0" step="1" placeholder="e.g., 180" />
+          <input type="number" id="bill" min="0" step="1" placeholder="e.g., 180" />
         </div>
-
-        <div class="field">
-          <label for="solarPayment">Monthly solar payment ($)</label>
-          <input id="solarPayment" type="number" min="0" step="1" placeholder="e.g., 135" />
+        <div class="form-group">
+          <label for="solarPayment">Solar monthly payment ($)</label>
+          <input type="number" id="solarPayment" min="0" step="1" placeholder="e.g., 135" />
         </div>
-
-        <div class="field">
-          <label>Timeline (years): <span id="yearsDisplay">25</span></label>
-          <!-- this wrapper ensures the slider never overflows -->
-          <div class="range-wrap">
-            <input id="yearsRange" type="range" min="1" max="30" value="25" />
-          </div>
+        <div class="form-group">
+          <label for="yearsRange">Years <span id="yearsDisplay">25</span></label>
+          <input type="range" id="yearsRange" min="10" max="30" value="25" />
         </div>
-
-        <!-- fixed 9% utility escalator (hidden) -->
-        <input id="utilityEsc" type="hidden" value="0.09" />
-
-        <div class="field span-2">
-          <label for="solarEsc">Solar escalator (PPA/lease rate increase)</label>
+        <input type="hidden" id="utilityEsc" value="0.09">
+        <div class="form-group">
+          <label for="solarEsc">Solar escalator</label>
           <select id="solarEsc">
-            <option value="0.0299" selected>2.99% per year</option>
-            <option value="0.0359">3.59% per year</option>
-            <option value="0.0199">1.99% per year</option>
-            <option value="0">0% (fixed)</option>
+            <option value="0.00">0% (fixed)</option>
+            <option value="0.01">1.99%</option>
+            <option value="0.02">3.59%</option>
+            <option value="0.0299" selected>2.9%</option>
           </select>
         </div>
-
-        <div class="actions span-3">
+        <div class="form-group full-row">
           <button id="runBtn" class="btn" type="button">Calculate</button>
         </div>
       </form>
 
-      <!-- Totals -->
-      <div class="totals">
-        <div class="total card-lite">
-          <div class="total-label">Total Utility Cost</div>
-          <div id="utilTotal" class="total-value">0</div>
+      <div class="results-summary">
+        <div class="result-box">
+          <span class="result-label">Total Utility Cost</span>
+          <span id="utilTotal" class="result-value">0</span>
         </div>
-        <div class="total card-lite">
-          <div class="total-label">Total Solar Cost</div>
-          <div id="solarTotal" class="total-value">0</div>
+        <div class="result-box">
+          <span class="result-label">Total Solar Cost</span>
+          <span id="solarTotal" class="result-value">0</span>
         </div>
-        <div class="total card-lite">
-          <div class="total-label">Total Utility Bill Savings</div>
-          <div id="savings" class="total-value">0</div>
-        </div>
-      </div>
-
-      <!-- Snapshot -->
-      <div class="snapshot card-lite">
-        <div class="snap-header">
-          <h2 class="snap-year">Year <span id="snapYear">25</span></h2>
-          <span class="snap-tag">Snapshot</span>
-        </div>
-
-        <div class="snap-rows">
-          <div class="row">
-            <span class="label">Monthly utility</span>
-            <span id="selMonthlyUtility" class="value">$0.00</span>
-          </div>
-          <div class="row">
-            <span class="label">Monthly solar</span>
-            <span id="selMonthlySolar" class="value">$0.00</span>
-          </div>
-          <div class="row">
-            <span class="label">Monthly savings</span>
-            <span id="selMonthlySavings" class="value">$0.00</span>
-          </div>
-          <div class="row">
-            <span class="label">Annual savings</span>
-            <span id="selAnnualSavings" class="value">$0.00</span>
-          </div>
+        <div class="result-box savings">
+          <span class="result-label">Lifetime Savings</span>
+          <span id="savings" class="result-value">0</span>
         </div>
       </div>
-    </section>
 
-    <!-- Reviews collage -->
-    <section class="reviews">
-      <h2 class="section-title">What local homeowners are saying</h2>
-      <p class="section-kicker">Independent public feedback from real customers.</p>
-
-      <div class="reviews-grid">
-        <figure class="rev"><img src="review_brad.jpg" alt="Review from Brad" /></figure>
-        <figure class="rev"><img src="review_tammy.jpg" alt="Review from Tammy" /></figure>
-        <figure class="rev"><img src="review_leslie.jpg" alt="Review from Leslie" /></figure>
-        <figure class="rev"><img src="review_juan.jpg" alt="Review from Juan" /></figure>
-        <figure class="rev"><img src="review_harvey.jpg" alt="Review from Harvey" /></figure>
-        <figure class="rev"><img src="review_cilvia.jpg" alt="Review from Cilvia" /></figure>
-        <figure class="rev"><img src="review_carolyn.jpg" alt="Review from Carolyn" /></figure>
-        <figure class="rev"><img src="review_terri.jpg" alt="Review from Terri" /></figure>
+      <div class="chart-wrapper">
+        <canvas id="savingsChart" width="800" height="350" aria-label="Savings comparison chart"></canvas>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Slides (images stacked) -->
-    <section class="slides">
-      <img src="pdf_page_2.png"  alt="Company overview" />
-      <img src="pdf_page_3.png"  alt="Install map" />
-      <img src="pdf_page_4.png"  alt="Partners" />
-      <img src="pdf_page_6.png"  alt="PPA explainer" />
-      <img src="pdf_page_11.png" alt="Options" />
-      <img src="pdf_page_13.png" alt="Reasons to go solar" />
-      <img src="pdf_page_14.png" alt="Rate trends" />
-      <img src="pdf_page_15.png" alt="Rate hike news" />
-      <img src="pdf_page_16.png" alt="Why rates rise" />
-      <img src="pdf_page_17.png" alt="FAQ" />
-      <img src="pdf_page_18.png" alt="Solar in snow" />
-      <img src="IMG_1359.jpeg" alt="Client install" />
-      <img src="IMG_2445.jpeg" alt="Client install" />
-      <img src="IMG_1920.jpeg" alt="Electrical work" />
-      <img src="IMG_6212.jpeg" alt="Electrical work" />
-      <img src="program_details_summary_final2.png" alt="Program details summary" />
-    </section>
+  <!-- Reviews Page -->
+  <section class="reviews">
+    <h2 class="reviews-title">What Our Customers Are Saying</h2>
+    <p class="reviews-sub">Real feedback from homeowners who made the switch</p>
+    <div class="reviews-grid">
+      <img src="review1.jpeg" alt="Review screenshot" />
+      <img src="review2.jpeg" alt="Review screenshot" />
+      <img src="review3.jpeg" alt="Review screenshot" />
+      <img src="review4.jpeg" alt="Review screenshot" />
+      <img src="review5.jpeg" alt="Review screenshot" />
+      <img src="review6.jpeg" alt="Review screenshot" />
+      <img src="review7.jpeg" alt="Review screenshot" />
+      <img src="review8.jpeg" alt="Review screenshot" />
+    </div>
+  </section>
 
-    <!-- How these estimates work -->
-    <section class="disclaimer card">
-      <h3>How these estimates work</h3>
-      <p>
-        This comparison illustrates how a household’s electricity costs can change over time when staying on standard utility
-        service versus choosing a solar power option. The starting utility bill and solar payment are held constant, then a
-        typical annual adjustment is applied to reflect changes in rates over time.
-      </p>
-      <ul>
-        <li>Utility costs are projected using a conservative <strong>9% annual adjustment</strong> based on long-term price trends for the region.</li>
-        <li>Many solar agreements include a modest annual escalator. For reference, fixed escalators around <strong>2.99%</strong> or <strong>3.59%</strong> per year are common—choose the option that matches your proposal.</li>
-        <li>Use the timeline to review <strong>1–30 years</strong> of expected cost exposure.</li>
-      </ul>
-      <p class="fine">
-        Figures shown are bill-to-bill estimates. Actual results may vary by usage, taxes, fees, and site conditions. Production and system upkeep are not reflected here.
-        Please review your documentation for complete terms. © 2025 Residential Cost Comparison Tool.
-      </p>
-    </section>
+  <!-- Slides -->
+  <section class="slides">
+    <div class="slide"><img src="pdf_page_2.png" alt="Company overview slide" /></div>
+    <div class="slide"><img src="pdf_page_3.png" alt="Installation map slide" /></div>
+    <div class="slide"><img src="pdf_page_4.png" alt="Partners slide" /></div>
+    <div class="slide"><img src="pdf_page_6.png" alt="PPA slide" /></div>
+    <div class="slide"><img src="pdf_page_11.png" alt="Options comparison slide" /></div>
+    <div class="slide"><img src="pdf_page_13.png" alt="Reasons to go solar slide" /></div>
+    <div class="slide"><img src="pdf_page_14.png" alt="Rate trends slide" /></div>
+    <div class="slide"><img src="pdf_page_15.png" alt="Rate hike news slide" /></div>
+    <div class="slide"><img src="pdf_page_16.png" alt="Why rates rise slide" /></div>
+    <div class="slide"><img src="pdf_page_17.png" alt="FAQ slide" /></div>
+    <div class="slide"><img src="pdf_page_18.png" alt="Solar in snow slide" /></div>
+    <div class="slide"><img src="IMG_1359.jpeg" alt="Clients Installs" /></div>
+    <div class="slide"><img src="IMG_1920.jpeg" alt="Electrical Work" /></div>
+    <div class="slide"><img src="IMG_6212.jpeg" alt="Electrical Work" /></div>
+    <div class="slide"><img src="program_details_summary_final2.png" alt="Program details summary" /></div>
+  </section>
 
-  </main>
+  <!-- Estimates Info -->
+  <section class="estimates-info">
+    <h2>How these estimates work</h2>
+    <p>
+      This calculator shows how your electricity expenses can grow over time when staying with your current utility versus switching to solar. We assume your starting utility bill and solar payment remain constant, then apply an annual rate increase (escalator) to both.
+    </p>
+    <ul>
+      <li>This calculator reflects utility rate increases using historic data, giving a realistic view of rising costs over time for Maine utilities.</li>
+      <li>Solar power purchase agreements (PPA) often include annual escalators. Many providers offer a fixed-rate escalator around 2.99% or 3.59% per year. Choose the solar escalator that matches your proposal.</li>
+      <li>Use the slider to adjust the timeline from 1 to 30 years.</li>
+    </ul>
+    <p>
+      These results are estimates and do not account for any potential energy production offsets. Consult with your solar professional for a detailed analysis.
+    </p>
+    <p>© 2025 Solar Savings Calculator</p>
+  </section>
 
   <script src="script.js"></script>
 </body>
