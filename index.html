@@ -5,9 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Solar Savings Calculator</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Minimal scoped tweaks so you don't have to touch style.css -->
+  <style>
+    /* Chart wrapper: responsive box the canvas can fill */
+    .chart-wrapper { width: 100%; position: relative; }
+    /* Snapshot card layout */
+    .snapshot-card {
+      background:#fff; border:1px solid #d7e3dd; border-radius:12px;
+      padding:16px; margin:0 0 16px;
+      box-shadow:0 8px 18px rgba(0,0,0,.05);
+    }
+    .snapshot-head {
+      display:flex; align-items:baseline; gap:12px; margin-bottom:8px;
+    }
+    .snapshot-year {
+      font-weight:800; font-size:clamp(22px,5vw,28px); color:#0f3427;
+    }
+    .snapshot-grid {
+      display:grid; grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:10px; align-items:center;
+    }
+    .snap-label { color:#5e6e66; }
+    .snap-value { font-weight:700; }
+    /* Keep canvas fluid; script sets internal bitmap size */
+    #savingsChart { width:100%; height:auto; display:block; }
+    @media (max-width:720px){
+      .snapshot-grid { grid-template-columns: 1fr; }
+    }
+    /* Simple hero to match your palette if you use one */
+    .hero{
+      background:linear-gradient(180deg,#0b8a5a 0%, #0a7b52 100%); color:#fff; padding:28px 0 22px;
+    }
+    .hero .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    .hero h1{margin:0 0 6px;font-size:clamp(28px,5vw,44px)}
+    .tagline{margin:0 0 14px;opacity:.95}
+    .logos{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+    .logos img{height:56px;width:auto;background:#fff;border-radius:8px;padding:6px 10px;box-shadow:0 6px 14px rgba(0,0,0,.15)}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field.full{grid-column:1/-1}
+    @media (max-width:880px){ .grid{grid-template-columns:1fr} }
+  </style>
 </head>
 <body>
 
+  <!-- Header / logos -->
   <header class="hero">
     <div class="container">
       <h1>Solar Savings Calculator</h1>
@@ -20,6 +64,7 @@
   </header>
 
   <main class="container">
+    <!-- Calculator -->
     <form id="calcForm" class="grid" onsubmit="return false;">
       <div class="field">
         <label for="bill">Monthly utility bill ($)</label>
@@ -53,6 +98,7 @@
       </div>
     </form>
 
+    <!-- Totals -->
     <section class="cards">
       <div class="card">
         <div class="card-title">Total Utility Cost</div>
@@ -68,22 +114,42 @@
       </div>
     </section>
 
-    <section class="snapshot">
-      <h3>Yearly Snapshot</h3>
-      <p id="snapshotText">Year 1: Utility monthly cost $0.00, Solar monthly cost $0.00, Monthly savings $0.00, Annual savings $0.00</p>
+    <!-- Yearly Snapshot (structured + pretty) -->
+    <section class="snapshot-card">
+      <div class="snapshot-head">
+        <div class="snapshot-year">Year <span id="selYear">1</span></div>
+        <div class="snap-label">Snapshot</div>
+      </div>
+      <div class="snapshot-grid">
+        <div class="snap-label">Monthly utility</div>
+        <div class="snap-value">$<span id="selMonthlyUtility">0.00</span></div>
+
+        <div class="snap-label">Monthly solar</div>
+        <div class="snap-value">$<span id="selMonthlySolar">0.00</span></div>
+
+        <div class="snap-label">Monthly savings</div>
+        <div class="snap-value">$<span id="selMonthlySavings">0.00</span></div>
+
+        <div class="snap-label">Annual savings</div>
+        <div class="snap-value">$<span id="selAnnualSavings">0</span></div>
+      </div>
+
+      <!-- Hidden text node for backward compatibility; your script may already write here -->
+      <p id="snapshotText" style="display:none"></p>
     </section>
 
-    <section class="chart">
-      <canvas id="savingsChart" width="1000" height="380" aria-label="Utility vs Solar costs"></canvas>
+    <!-- Chart -->
+    <section class="chart-wrapper">
+      <canvas id="savingsChart" aria-label="Utility vs Solar costs"></canvas>
     </section>
   </main>
 
-  <!-- Slides below (keep in whatever order you already have) -->
+  <!-- Slides (keep your order) -->
   <section class="slides">
-    <div class="slide"><img src="pdf_page_2.png" alt="Slide 2"></div>
-    <div class="slide"><img src="pdf_page_3.png" alt="Slide 3"></div>
-    <div class="slide"><img src="pdf_page_4.png" alt="Slide 4"></div>
-    <div class="slide"><img src="pdf_page_6.png" alt="Slide 6"></div>
+    <div class="slide"><img src="pdf_page_2.png"  alt="Slide 2"></div>
+    <div class="slide"><img src="pdf_page_3.png"  alt="Slide 3"></div>
+    <div class="slide"><img src="pdf_page_4.png"  alt="Slide 4"></div>
+    <div class="slide"><img src="pdf_page_6.png"  alt="Slide 6"></div>
     <div class="slide"><img src="pdf_page_11.png" alt="Slide 11"></div>
     <div class="slide"><img src="pdf_page_13.png" alt="Slide 13"></div>
     <div class="slide"><img src="pdf_page_14.png" alt="Slide 14"></div>
@@ -91,13 +157,14 @@
     <div class="slide"><img src="pdf_page_16.png" alt="Slide 16"></div>
     <div class="slide"><img src="pdf_page_17.png" alt="Slide 17"></div>
     <div class="slide"><img src="pdf_page_18.png" alt="Slide 18"></div>
-    <div class="slide"><img src="IMG_1359.jpeg" alt="Install"></div>
-    <div class="slide"><img src="IMG_2445.jpeg" alt="Install"></div>
-    <div class="slide"><img src="IMG_1920.jpeg" alt="Electrical"></div>
-    <div class="slide"><img src="IMG_6212.jpeg" alt="Electrical"></div>
+    <div class="slide"><img src="IMG_1359.jpeg" alt="Install 1"></div>
+    <div class="slide"><img src="IMG_2445.jpeg" alt="Install 2"></div>
+    <div class="slide"><img src="IMG_1920.jpeg" alt="Electrical 1"></div>
+    <div class="slide"><img src="IMG_6212.jpeg" alt="Electrical 2"></div>
     <div class="slide"><img src="program_details_summary_final2.png" alt="Program details"></div>
   </section>
 
+  <!-- “How these estimates work” block -->
   <section id="how-it-works" class="container">
     <div class="explain">
       <h3>How these estimates work</h3>
@@ -112,6 +179,43 @@
     </div>
   </section>
 
+  <!-- Your main calculator logic -->
   <script src="script.js"></script>
+
+  <!-- Tiny adapter: copy values from existing #snapshotText into the pretty snapshot above.
+       This means you DON'T need to change your script.js right now. -->
+  <script>
+    (function () {
+      const snapTextEl = document.getElementById('snapshotText');
+      const selYear   = document.getElementById('selYear');
+      const mUtil     = document.getElementById('selMonthlyUtility');
+      const mSolar    = document.getElementById('selMonthlySolar');
+      const mSave     = document.getElementById('selMonthlySavings');
+      const aSave     = document.getElementById('selAnnualSavings');
+
+      function applyFromText(txt) {
+        // Expects format like:
+        // "Year 13: Utility monthly cost $804.42, Solar monthly cost $363.41, Monthly savings $441.02, Annual savings $5,292.20"
+        const yearMatch = txt.match(/Year\s+(\d+)/i);
+        const utilMatch = txt.match(/Utility monthly cost \$([\d,]+\.\d{2}|\d+)/i);
+        const solarMatch = txt.match(/Solar monthly cost \$([\d,]+\.\d{2}|\d+)/i);
+        const mSaveMatch = txt.match(/Monthly savings \$([\d,]+\.\d{2}|\d+)/i);
+        const aSaveMatch = txt.match(/Annual savings \$([\d,]+\.\d{2}|\d+)/i);
+
+        if (yearMatch) selYear.textContent = yearMatch[1];
+        if (utilMatch) mUtil.textContent   = utilMatch[1];
+        if (solarMatch) mSolar.textContent = solarMatch[1];
+        if (mSaveMatch) mSave.textContent  = mSaveMatch[1];
+        if (aSaveMatch) aSave.textContent  = aSaveMatch[1];
+      }
+
+      // Update whenever your existing script writes to #snapshotText
+      const mo = new MutationObserver(() => applyFromText(snapTextEl.textContent || ''));
+      mo.observe(snapTextEl, { childList: true, characterData: true, subtree: true });
+
+      // Initial fill if already present
+      applyFromText(snapTextEl.textContent || '');
+    })();
+  </script>
 </body>
 </html>
