@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Reviews</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    h1 {
+      margin: 20px;
+      font-size: 2rem;
+    }
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .review-grid img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: transform 0.2s;
+    }
+    .review-grid img:hover {
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body>
+  <h1>What Our Customers Say</h1>
+  <div class="review-grid">
+    <img src="review_brad.jpg" alt="Review from Brad">
+    <img src="review_terri.jpg" alt="Review from Terri">
+    <img src="review_harvey.jpg" alt="Review from Harvey">
+    <img src="review_leslie.jpg" alt="Review from Leslie">
+    <img src="review_tammy.jpg" alt="Review from Tammy">
+    <img src="review_carolyn.jpg" alt="Review from Carolyn">
+    <img src="review_juan.jpg" alt="Review from Juan">
+  </div>
+</body>
+</html>
