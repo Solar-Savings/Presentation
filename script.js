@@ -1,79 +1,85 @@
-// Solar Savings – simple, no-chart calculator
+// Simple solar savings calculator (no chart)
 
 document.addEventListener('DOMContentLoaded', () => {
   // Elements
-  const billInput   = document.getElementById('bill');
-  const solarInput  = document.getElementById('solarPayment');
-  const yearsRange  = document.getElementById('yearsRange');
-  const yearsDisplay= document.getElementById('yearsDisplay');
-  const snapYearEl  = document.getElementById('snapYear');
+  const billInput       = document.getElementById('bill');
+  const solarInput      = document.getElementById('solarPayment');
+  const yearsRange      = document.getElementById('yearsRange');
+  const yearsDisplay    = document.getElementById('yearsDisplay');
+  const utilityEscInput = document.getElementById('utilityEsc'); // hidden 9%
+  const solarEscSelect  = document.getElementById('solarEsc');
 
-  const utilityEsc  = document.getElementById('utilityEsc'); // hidden 9%
-  const solarEscSel = document.getElementById('solarEsc');
+  const utilTotalEl   = document.getElementById('utilTotal');
+  const solarTotalEl  = document.getElementById('solarTotal');
+  const savingsEl     = document.getElementById('savings');
 
-  const utilTotalEl = document.getElementById('utilTotal');
-  const solarTotalEl= document.getElementById('solarTotal');
-  const savingsEl   = document.getElementById('savings');
-
-  const selMonthlyUtil   = document.getElementById('selMonthlyUtil');
-  const selMonthlySolar  = document.getElementById('selMonthlySolar');
-  const selMonthlySavings= document.getElementById('selMonthlySavings');
-  const selAnnualSavings = document.getElementById('selAnnualSavings');
+  const snapYearEl          = document.getElementById('snapYear');
+  const selMonthlyUtilityEl = document.getElementById('selMonthlyUtility');
+  const selMonthlySolarEl   = document.getElementById('selMonthlySolar');
+  const selMonthlySavingsEl = document.getElementById('selMonthlySavings');
+  const selAnnualSavingsEl  = document.getElementById('selAnnualSavings');
 
   const runBtn = document.getElementById('runBtn');
 
-  const money = n => n.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2});
+  // Helpers
+  const fmtMoney = n => {
+    const v = isFinite(n) ? n : 0;
+    return v.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  };
 
-  function seriesAnnual(monthly, rate, years){
-    const out = [];
-    let m = monthly;
-    for (let i=0;i<years;i++){
-      out.push(m*12);
-      m *= (1+rate);
+  const seriesTotal = (startMonthly, rate, years) => {
+    let total = 0;
+    let m = Number(startMonthly) || 0;
+    for (let i = 0; i < years; i++) {
+      total += m * 12;
+      m *= (1 + rate);
     }
-    return out;
-  }
-  const sum = arr => arr.reduce((a,b)=>a+b,0);
+    return total;
+  };
 
-  function calc(){
-    const bill   = Math.max(0, parseFloat(billInput.value) || 0);
-    const solar  = Math.max(0, parseFloat(solarInput.value) || 0);
-    const years  = Math.max(1, Math.min(30, parseInt(yearsRange.value || '25',10)));
-    const utilR  = parseFloat(utilityEsc.value) || 0.09; // 9% fixed
-    const solarR = parseFloat(solarEscSel.value) || 0;
+  const monthlyAtYear = (startMonthly, rate, yearIndex) => {
+    // yearIndex is 1-based (Year 1 = no escalation yet)
+    return (Number(startMonthly) || 0) * Math.pow(1 + rate, Math.max(0, yearIndex - 1));
+  };
 
-    yearsDisplay.textContent = years;
-    snapYearEl.textContent = `Year ${years}`;
+  function recalc() {
+    const years   = parseInt(yearsRange.value || '25', 10);
+    const utilEsc = parseFloat(utilityEscInput.value || '0.09'); // fixed 9%
+    const solEsc  = parseFloat(solarEscSelect.value || '0.0299');
 
-    const utilSeries  = seriesAnnual(bill,  utilR, years);
-    const solarSeries = seriesAnnual(solar, solarR, years);
+    const bill   = parseFloat(billInput.value || '0');
+    const solar  = parseFloat(solarInput.value || '0');
 
-    const utilTotal  = sum(utilSeries);
-    const solarTotal = sum(solarSeries);
+    // totals
+    const utilTotal  = seriesTotal(bill,  utilEsc, years);
+    const solarTotal = seriesTotal(solar, solEsc, years);
     const savings    = utilTotal - solarTotal;
 
-    utilTotalEl.textContent  = money(utilTotal);
-    solarTotalEl.textContent = money(solarTotal);
-    savingsEl.textContent    = money(savings);
+    utilTotalEl.textContent  = Math.round(utilTotal).toLocaleString('en-US');
+    solarTotalEl.textContent = Math.round(solarTotal).toLocaleString('en-US');
+    savingsEl.textContent    = Math.round(savings).toLocaleString('en-US');
 
-    // Yearly snapshot (month N)
-    const utilMonthN  = bill  * Math.pow(1+utilR,  years-1);
-    const solarMonthN = solar * Math.pow(1+solarR, years-1);
-    const monthSave   = Math.max(0, utilMonthN - solarMonthN);
-    const annualSave  = monthSave * 12;
+    // snapshot
+    yearsDisplay.textContent = years;
+    snapYearEl.textContent   = years;
 
-    selMonthlyUtil.textContent    = money(utilMonthN);
-    selMonthlySolar.textContent   = money(solarMonthN);
-    selMonthlySavings.textContent = money(monthSave);
-    selAnnualSavings.textContent  = money(annualSave);
+    const uMonthly = monthlyAtYear(bill,  utilEsc, years);
+    const sMonthly = monthlyAtYear(solar, solEsc, years);
+    const mSave    = Math.max(0, uMonthly - sMonthly);
+    const aSave    = mSave * 12;
+
+    selMonthlyUtilityEl.textContent = fmtMoney(uMonthly);
+    selMonthlySolarEl.textContent   = fmtMoney(sMonthly);
+    selMonthlySavingsEl.textContent = fmtMoney(mSave);
+    selAnnualSavingsEl.textContent  = fmtMoney(aSave);
   }
 
-  // Live updates
-  [billInput, solarInput, solarEscSel, yearsRange].forEach(el=>{
-    el.addEventListener('input', calc);
-  });
-  runBtn.addEventListener('click', calc);
+  // Events
+  runBtn.addEventListener('click', recalc);
+  [billInput, solarInput].forEach(el => el.addEventListener('input', recalc));
+  yearsRange.addEventListener('input', recalc);
+  solarEscSelect.addEventListener('change', recalc);
 
-  // Initial render
-  calc();
+  // First run
+  recalc();
 });
