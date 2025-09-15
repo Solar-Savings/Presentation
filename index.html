@@ -2,101 +2,116 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Solar Savings Calculator</title>
-  <!-- Link to the custom stylesheet for layout and styling -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!--
-    The calculator section occupies the top of the page.  It displays
-    the title and utility company logos, followed by the input form,
-    results summary and a comparison chart.  This closely mirrors
-    the original solar savings calculator while removing any extra
-    navigation or menu elements.  Only the calculator content
-    appears above the fold.
-  -->
-  <section class="calculator-section">
+
+  <header class="hero">
     <div class="container">
-      <h1 class="page-title">Solar Savings Calculator</h1>
-      <!-- Utility company logos -->
-      <div class="logo-container">
-        <img src="cmp.png" alt="Central Maine Power logo" class="utility-logo" />
-        <img src="versant.png" alt="Versant Power logo" class="utility-logo" />
+      <h1>Solar Savings Calculator</h1>
+      <p class="tagline">See how switching to solar can reduce your electricity costs over time.</p>
+      <div class="logos">
+        <img src="versant.png" alt="Versant Power" />
+        <img src="cmp.png" alt="CMP" />
       </div>
-      <!-- Calculator form -->
-      <form id="calcForm" class="calc-form" onsubmit="return false;">
-        <div class="form-group">
-          <label for="bill">Monthly utility bill ($)</label>
-          <input type="number" id="bill" min="0" step="1" placeholder="e.g., 180" />
-        </div>
-        <div class="form-group">
-          <label for="solarPayment">Solar monthly payment ($)</label>
-          <input type="number" id="solarPayment" min="0" step="1" placeholder="e.g., 135" />
-        </div>
-        <div class="form-group">
-          <label for="yearsRange">Years <span id="yearsDisplay">25</span></label>
-          <input type="range" id="yearsRange" min="0" max="30" value="25" />
-        </div>
-        <div class="form-group">
-        <input type="hidden" id="utilityEsc" value="0.09">
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="solarEsc">Solar escalator</label>
-          <select id="solarEsc">
-            <option value="0.00">0% (fixed)</option>
-            <option value="0.01">1.99%</option>
-            <option value="0.02">3.59%</option>
-            <option value="0.029" selected>2.99%</option>
-          </select>
-        </div>
-        <div class="form-group full-row">
-          <button id="runBtn" class="btn" type="button">Calculate</button>
-        </div>
-      </form>
-      <!-- Results summary -->
-      <div class="results-summary">
-        <div class="result-box">
-          <span class="result-label">Total Utility Cost</span>
-          <span id="utilTotal" class="result-value">0</span>
-        </div>
-        <div class="result-box">
-          <span class="result-label">Total Solar Cost</span>
-          <span id="solarTotal" class="result-value">0</span>
-        </div>
-        <div class="result-box savings">
-          <span class="result-label">Lifetime Savings</span>
-          <span id="savings" class="result-value">0</span>
-        </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <form id="calcForm" class="grid" onsubmit="return false;">
+      <div class="field">
+        <label for="bill">Monthly utility bill ($)</label>
+        <input id="bill" type="number" min="0" step="1" placeholder="e.g., 180" />
       </div>
-      <!-- Chart container -->
-      <div class="chart-wrapper">
-        <canvas id="savingsChart" width="800" height="350" aria-label="Savings comparison chart"></canvas>
+
+      <div class="field">
+        <label for="solarPayment">Monthly solar payment ($)</label>
+        <input id="solarPayment" type="number" min="0" step="1" placeholder="e.g., 135" />
       </div>
+
+      <div class="field">
+        <label for="yearsRange">Timeline (years): <span id="yearsDisplay">25</span></label>
+        <input id="yearsRange" type="range" min="1" max="30" value="25" />
+      </div>
+
+      <!-- Utility escalator is fixed at 9% and hidden -->
+      <input id="utilityEsc" type="hidden" value="0.09" />
+
+      <div class="field">
+        <label for="solarEsc">Solar escalator (PPA/lease rate increase)</label>
+        <select id="solarEsc">
+          <option value="0.0299" selected>2.99% per year</option>
+          <option value="0.0359">3.59% per year</option>
+          <option value="0.00">Fixed (0%)</option>
+        </select>
+      </div>
+
+      <div class="field full">
+        <button id="runBtn" class="btn">Calculate</button>
+      </div>
+    </form>
+
+    <section class="cards">
+      <div class="card">
+        <div class="card-title">Total Utility Cost</div>
+        <div class="card-value" id="utilTotal">0</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Total Solar Cost</div>
+        <div class="card-value" id="solarTotal">0</div>
+      </div>
+      <div class="card savings">
+        <div class="card-title">You Save</div>
+        <div class="card-value" id="savings">0</div>
+      </div>
+    </section>
+
+    <section class="snapshot">
+      <h3>Yearly Snapshot</h3>
+      <p id="snapshotText">Year 1: Utility monthly cost $0.00, Solar monthly cost $0.00, Monthly savings $0.00, Annual savings $0.00</p>
+    </section>
+
+    <section class="chart">
+      <canvas id="savingsChart" width="1000" height="380" aria-label="Utility vs Solar costs"></canvas>
+    </section>
+  </main>
+
+  <!-- Slides below (keep in whatever order you already have) -->
+  <section class="slides">
+    <div class="slide"><img src="pdf_page_2.png" alt="Slide 2"></div>
+    <div class="slide"><img src="pdf_page_3.png" alt="Slide 3"></div>
+    <div class="slide"><img src="pdf_page_4.png" alt="Slide 4"></div>
+    <div class="slide"><img src="pdf_page_6.png" alt="Slide 6"></div>
+    <div class="slide"><img src="pdf_page_11.png" alt="Slide 11"></div>
+    <div class="slide"><img src="pdf_page_13.png" alt="Slide 13"></div>
+    <div class="slide"><img src="pdf_page_14.png" alt="Slide 14"></div>
+    <div class="slide"><img src="pdf_page_15.png" alt="Slide 15"></div>
+    <div class="slide"><img src="pdf_page_16.png" alt="Slide 16"></div>
+    <div class="slide"><img src="pdf_page_17.png" alt="Slide 17"></div>
+    <div class="slide"><img src="pdf_page_18.png" alt="Slide 18"></div>
+    <div class="slide"><img src="IMG_1359.jpeg" alt="Install"></div>
+    <div class="slide"><img src="IMG_2445.jpeg" alt="Install"></div>
+    <div class="slide"><img src="IMG_1920.jpeg" alt="Electrical"></div>
+    <div class="slide"><img src="IMG_6212.jpeg" alt="Electrical"></div>
+    <div class="slide"><img src="program_details_summary_final2.png" alt="Program details"></div>
+  </section>
+
+  <section id="how-it-works" class="container">
+    <div class="explain">
+      <h3>How these estimates work</h3>
+      <p>This calculator shows how your electricity expenses can grow over time when staying with your current utility versus switching to solar. We assume your starting utility bill and solar payment remain constant, then apply an annual rate increase (escalator) to both.</p>
+      <ul>
+        <li>This calculator reflects utility rate increases using historic data, giving a realistic view of rising costs over time for Maine utilities.</li>
+        <li>Solar power purchase agreements (PPA) often include annual escalators. Many providers offer a fixed-rate escalator around 2.99% or 3.59% per year. Choose the solar escalator that matches your proposal.</li>
+        <li>Use the slider to adjust the timeline from 1 to 30 years.</li>
+      </ul>
+      <p class="muted">These results are estimates and do not account for any potential energy production offsets. Consult with your solar professional for a detailed analysis.</p>
+      <p class="muted">© 2025 Solar Savings Calculator</p>
     </div>
   </section>
 
-  <!-- Slides follow below the calculator in the order provided -->
-  <section class="slides">
-    <div class="slide"><img src="pdf_page_2.png" alt="Company overview slide" /></div>
-    <div class="slide"><img src="pdf_page_3.png" alt="Installation map slide" /></div>
-    <div class="slide"><img src="pdf_page_4.png" alt="Partners slide" /></div>
-    <div class="slide"><img src="pdf_page_6.png" alt="PPA slide" /></div>
-    <div class="slide"><img src="pdf_page_11.png" alt="Options comparison slide" /></div>
-    <div class="slide"><img src="pdf_page_13.png" alt="Reasons to go solar slide" /></div>
-    <div class="slide"><img src="pdf_page_14.png" alt="Rate trends slide" /></div>
-    <div class="slide"><img src="pdf_page_15.png" alt="Rate hike news slide" /></div>
-    <div class="slide"><img src="pdf_page_16.png" alt="Why rates rise slide" /></div>
-    <div class="slide"><img src="pdf_page_17.png" alt="FAQ slide" /></div>
-    <div class="slide"><img src="pdf_page_18.png" alt="Solar in snow slide" /></div>
-    <div class="slide"><img src="IMG_1359.jpeg" alt="clients Solar Installation" /></div>
-    <div class="slide"><img src="IMG_1920.jpeg" alt="Electrical Work" /></div>
-    <div class="slide"><img src="IMG_6212.jpeg" alt="Electrical Work" /></div>
-    <div class="slide"><img src="program_details_summary_final2.png" alt="Program details summary" /></div>
-  </section>
-
-  <!-- Link to the calculator logic -->
   <script src="script.js"></script>
 </body>
 </html>
