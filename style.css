@@ -99,7 +99,41 @@ input[type="number"], select{
 }
 .rev{margin:0;background:#0f0f0f;border-radius:14px;padding:10px;box-shadow:0 8px 26px rgba(0,0,0,.18)}
 .rev img{width:100%;height:auto;border-radius:10px;object-fit:contain;background:#000}
+/* Links section */
+.links.card {
+  padding: 20px;
+  margin: 28px auto;
+}
 
+.link-list {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px 18px;
+}
+
+.link-list li {
+  display: flex;
+  align-items: center;
+}
+
+.link-list a {
+  display: inline-block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  text-decoration: none;
+  color: #0f3d2e;
+  transition: transform .06s ease, box-shadow .12s ease;
+}
+
+.link-list a:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,.10);
+}
 /* Slides */
 .slides{margin-top:22px;display:grid;gap:14px}
 .slides img{width:100%;height:auto;border-radius:12px;border:1px solid var(--ring);background:#fff}
