@@ -93,9 +93,10 @@ input[type="number"], select{
 .reviews{margin-top:28px}
 .section-title{font-size:clamp(22px,5vw,34px);margin:0}
 .section-kicker{margin:6px 0 16px;color:var(--muted)}
-.reviews-grid{
-  display:grid;gap:18px;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+.reviews-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, 1fr);
 }
 .rev{margin:0;background:#0f0f0f;border-radius:14px;padding:10px;box-shadow:0 8px 26px rgba(0,0,0,.18)}
 .rev img{width:100%;height:auto;border-radius:10px;object-fit:contain;background:#000}
