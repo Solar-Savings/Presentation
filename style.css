@@ -88,7 +88,51 @@ input[type="number"], select{
 .row:first-child{border-top:none}
 .row .label{color:var(--muted);font-weight:600}
 .row .value{font-weight:800}
+/* ============ TaxHive (ownership optimization) ============ */
+.taxhive { margin-top: 26px; }
+.taxhive-head { display:flex; align-items:center; gap:16px; }
+.taxhive-badge { width:72px; height:auto; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,.08); }
 
+.taxhive-grid {
+  display:grid;
+  gap:16px;
+  margin-top:14px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.taxhive .tile {
+  background:#fff;
+  border:1px solid #e7ece9;
+  border-radius:12px;
+  padding:14px 16px;
+}
+.taxhive .tile h3 { margin:0 0 6px 0; font-size: clamp(16px, 2.7vw, 18px); }
+
+.taxhive-steps { margin-top:10px; }
+.taxhive-steps .subhead { margin:0 0 8px 0; font-size: clamp(16px, 2.7vw, 18px); }
+.taxhive-steps .steps {
+  list-style:none; padding:0; margin:0;
+  display:grid; gap:10px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.taxhive-steps .steps li {
+  background:#f4f8f6; border:1px dashed #cfe0d8; border-radius:12px; padding:12px;
+  display:flex; gap:10px; align-items:flex-start;
+}
+.taxhive-steps .steps li span {
+  display:inline-grid; place-items:center; width:26px; height:26px;
+  border-radius:50%; background:var(--green); color:#fff; font-weight:700;
+}
+
+.taxhive-faq { margin-top:12px; }
+.faq-toggle {
+  width:100%; text-align:left; padding:12px 14px; margin:8px 0;
+  background:#eef6f1; border:1px solid #d6e8df; border-radius:10px; font-weight:600;
+}
+.faq { display:none; padding:10px 12px; background:#fff; border-left:3px solid var(--green); border-radius:8px; }
+
+.taxhive-cta { margin-top:14px; text-align:center; }
+.taxhive-cta .btn { display:inline-block; padding:12px 16px; border-radius:10px; background:var(--green); color:#fff; }
+.taxhive .fine { margin-top:10px; color:var(--muted); font-size:.9rem; }
 /* Reviews (no cropping; names visible) */
 .reviews{margin-top:28px}
 .section-title{font-size:clamp(22px,5vw,34px);margin:0}
