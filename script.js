@@ -71,4 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // First paint
   recalc();
+  // FAQ dropdown toggle
+document.querySelectorAll('.faq-toggle').forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const content = toggle.nextElementSibling;
+    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+  });
+});
 });
