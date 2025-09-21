@@ -20,7 +20,7 @@ img{max-width:100%;display:block}
 .title{margin:0 0 6px 0;font-size:clamp(26px,4.5vw,44px);font-weight:800;letter-spacing:.2px}
 .subtitle{margin:0 0 16px 0;opacity:.9}
 .hero__logos{display:flex;gap:18px}
-.utility-logo{height:64px;width:auto;background:#fff;border-radius:14px;padding:10px 16px;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.utility-logo{height:120px;width:auto;background:#fff;border-radius:14px;padding:10px 16px;box-shadow:0 8px 20px rgba(0,0,0,.12)}
 
 /* Cards */
 .card{background:var(--card);border-radius:14px;padding:16px 16px 10px;box-shadow:0 8px 28px rgba(0,0,0,.10);margin-top:18px}
