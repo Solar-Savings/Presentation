@@ -300,3 +300,31 @@ input[type="number"], select{
   font-weight: 600;
   text-decoration: underline;
 }
+/* ===== Electricity Rates chart ===== */
+.chart-card { margin-top: 24px; }
+.chart-wrap { position: relative; width: 100%; }
+.chart-wrap canvas { width: 100%; height: 380px; display: block; }
+
+.chart-legend {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 10px; color: var(--muted);
+  font-weight: 600;
+}
+.chart-legend .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #0b74da; display: inline-block;
+}
+
+.chart-notes {
+  margin-top: 8px; color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.chart-fallback summary { cursor: pointer; margin-top: 10px; }
+.chart-fallback table {
+  width: 100%; border-collapse: collapse; margin-top: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.chart-fallback th, .chart-fallback td {
+  border-bottom: 1px solid #e8eef5; padding: 6px 8px; text-align: left;
+}
