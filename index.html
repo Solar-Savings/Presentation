@@ -7,25 +7,25 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="phone" style="text-align: center; margin-top: 10px; margin-bottom: 25px;">
-  <p style="font-size: 28px; font-weight: bold; margin: 0;">📞 Aidan Leavitt</p>
-  <p style="font-size: 32px; font-weight: 900; margin: 5px 0 0 0;">
-    <a href="tel:16037679594" style="text-decoration: none; color: #003366;">
-      (603) 767-9594
-    </a>
-  </p>
-</div>
+
+  <!-- Phone header -->
+  <div class="phone" style="text-align:center;margin-top:10px;margin-bottom:25px;">
+    <p style="font-size:28px;font-weight:bold;margin:0;">📞 Aidan Leavitt</p>
+    <p style="font-size:32px;font-weight:900;margin:5px 0 0 0;">
+      <a href="tel:16037679594" style="text-decoration:none;color:#003366;">(603) 767-9594</a>
+    </p>
+  </div>
+
   <!-- Hero -->
   <header class="hero">
     <div class="container hero__inner">
       <div class="hero__text">
         <h1 class="title">Solar Savings Calculator</h1>
         <p class="subtitle">See how switching to solar can reduce your electricity costs over time.</p>
-      
       </div>
       <div class="hero__logos">
-        <img src="cmp.png" alt="Central Maine Power" class="utility-logo" />
-        <img src="versant.png" alt="Versant Power" class="utility-logo" />
+        <img src="cmp.png"     alt="Central Maine Power" class="utility-logo" />
+        <img src="versant.png" alt="Versant Power"       class="utility-logo" />
       </div>
     </div>
   </header>
@@ -59,7 +59,7 @@
           <label for="solarEsc">Solar escalator (PPA/lease rate increase)</label>
           <select id="solarEsc">
             <option value="0.0299">2.99% per year</option>
-            <option value="0.0359"selected>3.59% per year</option>
+            <option value="0.0359" selected>3.59% per year</option>
             <option value="0.0199">1.99% per year</option>
             <option value="0">0% (fixed)</option>
           </select>
@@ -93,25 +93,14 @@
           <span class="snap-tag">Snapshot</span>
         </header>
         <div class="snap-rows">
-          <div class="row">
-            <span class="label">Monthly utility</span>
-            <span id="selMonthlyUtility" class="value">$0.00</span>
-          </div>
-          <div class="row">
-            <span class="label">Monthly solar</span>
-            <span id="selMonthlySolar" class="value">$0.00</span>
-          </div>
-          <div class="row">
-            <span class="label">Monthly savings</span>
-            <span id="selMonthlySavings" class="value">$0.00</span>
-          </div>
-          <div class="row">
-            <span class="label">Annual savings</span>
-            <span id="selAnnualSavings" class="value">$0.00</span>
-          </div>
+          <div class="row"><span class="label">Monthly utility</span><span id="selMonthlyUtility" class="value">$0.00</span></div>
+          <div class="row"><span class="label">Monthly solar</span><span id="selMonthlySolar" class="value">$0.00</span></div>
+          <div class="row"><span class="label">Monthly savings</span><span id="selMonthlySavings" class="value">$0.00</span></div>
+          <div class="row"><span class="label">Annual savings</span><span id="selAnnualSavings" class="value">$0.00</span></div>
         </div>
       </article>
     </section>
+
     <!-- ================== How these estimates work ================== -->
     <section class="disclaimer card">
       <h3>How these estimates work</h3>
@@ -123,187 +112,80 @@
         <li>This calculator reflects utility rate increases using historic data, giving a realistic view of rising costs over time for Maine utilities.</li>
         <li>Use the slider to adjust the timeline from 1 to 30 years.</li>
       </ul>
-      <p class="fine">
-        These results are estimates and do not account for any potential energy production offsets. Consult with your solar professional for a detailed analysis.
-      </p>
+      <p class="fine">These results are estimates and do not account for any potential energy production offsets. Consult with your solar professional for a detailed analysis.</p>
       <p class="fine">© 2025 Solar Savings Calculator</p>
     </section>
 
-  </main>
+    <!-- ================== More About Us ================== -->
+    <section class="links card" id="more-links">
+      <h2 class="section-title">More About Us</h2>
+      <p class="section-kicker">Independent coverage, rankings, and public profiles.</p>
+      <ul class="link-list">
+        <li><a href="https://www.google.com/search?q=aidan%20leavitt%20new%20hampshire&source=sh/x/gs/m2/5" target="_blank" rel="noopener">Google search — Aidan Leavitt (NH)</a></li>
+        <li><a href="https://www.google.com/search?client=safari&sca_esv=c6620bc555597255&hl=en-us&sxsrf=AE3TifNDulDsVoQz53DfbpAova_ab83HHQ:1758132159208&q=freedom+forever+lewiston+reviews&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E-E9atDPUIVXBhicj5Bh9p88swcgvVH3tuj9K3cT5w6ARtjealHp1O-VB0s1fpVt0A-mjpfmjMTrVbSMI8TIh-LfLGCmQedIJ2bwkoTIf20yxWbbOQ%3D%3D&sa=X&ved=2ahUKEwiclsXWsOCPAxVYMlkFHWkvM7kQk8gLegQIGhAB#ebo=1" target="_blank" rel="noopener">Google reviews — Freedom Forever (Lewiston)</a></li>
+        <li><a href="https://www.prnewswire.com/news-releases/freedom-forever-ranked-no-1-residential-solar-contractor-on-the-2024-top-solar-contractors-list-302265064.html" target="_blank" rel="noopener">Press: Freedom Forever ranked #1 (PR Newswire)</a></li>
+        <li><a href="https://www.google.com/search?client=safari&sca_esv=c6620bc555597255&hl=en-us&sxsrf=AE3TifMHMUJJOuCaPs3ZL9qXBllE9JUftA%3A1758132287452&kgmid=%2Fg%2F11s22gtvzb&q=VITL" target="_blank" rel="noopener">Google profile — VITL</a></li>
+        <li><a href="https://www.google.com/search?q=vitl+power+san+diego#vhid=43:/g/11y71z8d8k" target="_blank" rel="noopener">Google reviews — VITL Power (San Diego)</a></li>
+        <li><a href="https://finance.yahoo.com/news/freedom-forever-ranked-no-1-124200166.html" target="_blank" rel="noopener">Coverage: Freedom Forever ranked #1 (Yahoo Finance)</a></li>
+        <li><a href="https://electrek.co/2025/05/13/house-draft-budget-kills-the-30-residential-solar-tax-credit/" target="_blank" rel="noopener">Policy watch: House draft cuts 30% solar tax credit (Electrek)</a></li>
+      </ul>
+    </section>
 
-  <script src="script.js"></script>
-</body>
-</html>
-<!-- ================== Extra Links ================== -->
-<section class="links card" id="more-links">
-  <h2 class="section-title">More About Us</h2>
-  <p class="section-kicker">Independent coverage, rankings, and public profiles.</p>
+    <!-- ================== VITL / TaxHive Partnership ================== -->
+    <section class="partner-link">
+      <h3>VITL / TaxHive Partnership</h3>
+      <p>
+        We’ve partnered with <strong>TaxHive</strong> to maximize your tax savings when going solar.
+        Watch this short overview:
+        <a href="https://vimeo.com/1076213221/33013d8928" target="_blank" class="partner-btn">Watch the TaxHive Partnership Video</a>
+      </p>
+    </section>
 
-  <ul class="link-list">
-    <li>
-      <a href="https://www.google.com/search?q=aidan%20leavitt%20new%20hampshire&source=sh/x/gs/m2/5"
-         target="_blank" rel="noopener">
-        Google search — Aidan Leavitt (NH)
-      </a>
-    </li>
+    <section id="taxhive" class="card taxhive">
+      <div class="taxhive-head">
+        <img src="Assets-taxhive-logo.png" alt="TaxHive" class="taxhive-logo" />
+        <div>
+          <h2 class="section-title">Own & Optimize with TaxHive</h2>
+          <p class="section-kicker">Considering ownership? We coordinate with <strong>TaxHive</strong> so you can capture eligible incentives and file correctly.</p>
+        </div>
+      </div>
 
-    <li>
-      <a href="https://www.google.com/search?client=safari&sca_esv=c6620bc555597255&hl=en-us&sxsrf=AE3TifNDulDsVoQz53DfbpAova_ab83HHQ:1758132159208&q=freedom+forever+lewiston+reviews&uds=AOm0WdHZoG48XH2x0OYjJCcWVADn2lcmAXtnZ3wDYoxoqIGh9VPYTaJ6Z2xUJaAjii_AqwykdbG8271nJz_BVj2OFWzIUX08KhlahlGkvpd--0MD24JR96FsnniIr1IBpApPVV6W2upJmnJ9jUk8wBFiuJbxJ1tXV_FWT1C8vlWt4MFA2bpGR-AX9DqVBk49wRlS61yVu04mK-besS8aIoWHbbTIZtRbGwjU04rFixmYo4C7WZ_Vbc6NsqsplIzWKUpoB3mdkjfAchswX5aK7ia2bse_Xy1_U8cWGZXPrb9To0KxPfCYE9nl9ZGMOlzEeqRCUlXfnq6VRvtPtcu6Bm74pbQu2zalCHfkbjebdR0IwMbTR5AMgM744bGImuXWnnVEIZQLlAYjVojG0S1EjdYbzaVyI0EHDQ&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E-E9atDPUIVXBhicj5Bh9p88swcgvVH3tuj9K3cT5w6ARtjealHp1O-VB0s1fpVt0A-mjpfmjMTrVbSMI8TIh-LfLGCmQedIJ2bwkoTIf20yxWbbOQ%3D%3D&sa=X&ved=2ahUKEwiclsXWsOCPAxVYMlkFHWkvM7kQk8gLegQIGhAB&ictx=1&biw=440&bih=758&dpr=3#ebo=1"
-         target="_blank" rel="noopener">
-        Google reviews — Freedom Forever (Lewiston)
-      </a>
-    </li>
+      <div class="taxhive-grid">
+        <article class="tile"><h3>Federal clean energy credit</h3><p>Eligible homeowners may claim a federal income-tax credit for a portion of qualified solar costs (subject to IRS rules and legislative changes). Credit reduces tax liability, not income.</p></article>
+        <article class="tile"><h3>Depreciation (for qualifying business use)</h3><p>If the system serves an income-producing property or qualified business use, accelerated depreciation may apply. TaxHive evaluates eligibility and method (e.g., MACRS / bonus).</p></article>
+        <article class="tile"><h3>Net-metering revenue</h3><p>Excess production can offset usage and, where available, earn bill credits or payments from the utility. Program terms vary by utility and state.</p></article>
+      </div>
 
-    <li>
-      <a href="https://www.prnewswire.com/news-releases/freedom-forever-ranked-no-1-residential-solar-contractor-on-the-2024-top-solar-contractors-list-302265064.html"
-         target="_blank" rel="noopener">
-        Press: Freedom Forever ranked #1 (PR Newswire)
-      </a>
-    </li>
+      <h3 class="minhead">How the TaxHive support works</h3>
+      <ul class="taxhive-steps">
+        <li><span class="badge">1</span> We scope your system & documentation.</li>
+        <li><span class="badge">2</span> Warm intro to a TaxHive pro (no pressure).</li>
+        <li><span class="badge">3</span> They verify eligibility & prepare filings.</li>
+        <li><span class="badge">4</span> You file with confidence and keep records.</li>
+      </ul>
 
-    <li>
-      <a href="https://www.google.com/search?client=safari&sca_esv=c6620bc555597255&hl=en-us&sxsrf=AE3TifMHMUJJOuCaPs3ZL9qXBllE9JUftA%3A1758132287452&kgmid=%2Fg%2F11s22gtvzb&q=VITL&shndl=30&shem=lsptbl1&source=sh%2Fx%2Floc%2Fact%2Fm4%2F3"
-         target="_blank" rel="noopener">
-        Google profile — VITL
-      </a>
-    </li>
+      <div class="taxhive-faq" id="taxhive-faq">
+        <button class="faq-toggle" aria-expanded="false" aria-controls="faq1" id="faq1-btn">WHAT DOES “CREDIT” VS. “DEDUCTION” MEAN?</button>
+        <div id="faq1" class="faq-panel" hidden>
+          <p>A <strong>tax credit</strong> directly reduces the taxes you owe; a <strong>deduction</strong> reduces taxable income. Some owners combine both (credit + depreciation). TaxHive coordinates the details so it’s filed correctly.</p>
+        </div>
 
-    <li>
-      <a href="https://www.google.com/search?q=vitl+power+san+diego&client=safari&sca_esv=c6620bc555597255&hl=en-us&sxsrf=AE3TifOfvLl3npkjDzx6VFLVLeRt02wavA%3A1758132318529&ei=XvjKaImHILns5NoPkuOdoQU&oq=vitl+power+san+diego&gs_lp=EhNtb2JpbGUtZ3dzLXdpei1zZXJwIhR2aXRsIHBvd2VyIHNhbiBkaWVnbzIFEAAYgAQyBRAhGKABMgUQIRigATIFECEYoAEyBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yCxAAGIAEGIYDGIoFSPkyUNAEWMQwcAJ4AZABAJgBugGgAcEXqgEEMC4yMrgBA8gBAPgBAZgCEqAC0RHCAgoQABiwAxjWBBhHwgIEECMYJ8ICBxAjGCcYywTCAgUQABjvBcICCBAAGIAEGKIEwgIKECMYgAQYJxiKBcICCxAAGIAEGJECGIoFwgIREC4YgAQYkQIYxwEYigUYrwGYAwCIBgGQBgiSBwQyLjE2oAfHkwGyBwQwLjE2uAfMEcIHBjAuMy4xNcgHSw&sclient=mobile-gws-wiz-serp#vhid=43:/g/11y71z8d8k&vssid=reviews-collection-viewer-reviews-summary-entrypoint"
-         target="_blank" rel="noopener">
-        Google reviews — VITL Power (San Diego)
-      </a>
-    </li>
+        <button class="faq-toggle" aria-expanded="false" aria-controls="faq2" id="faq2-btn">CAN I GET “100% WRITE-OFFS”?</button>
+        <div id="faq2" class="faq-panel" hidden>
+          <p>Some owners with qualifying business use stack credit, bonus/accelerated depreciation, and eligible expenses to approach the full system cost in early years. Results depend on basis, usage split, and current rules.</p>
+        </div>
 
-    <li>
-      <a href="https://finance.yahoo.com/news/freedom-forever-ranked-no-1-124200166.html"
-         target="_blank" rel="noopener">
-        Coverage: Freedom Forever ranked #1 (Yahoo Finance)
-      </a>
-    </li>
-
-    <li>
-      <a href="https://electrek.co/2025/05/13/house-draft-budget-kills-the-30-residential-solar-tax-credit/"
-         target="_blank" rel="noopener">
-        Policy watch: House draft cuts 30% solar tax credit (Electrek)
-      </a>
-    </li>
-  </ul>
-</section>
-<!-- ================ Electricity Rates (Chart.js) ================ -->
-<section class="card chart-card" id="rates">
-  <h2 class="section-title">Electricity prices keep climbing</h2>
-  <p class="section-kicker">National average residential price (¢/kWh). Clear, readable, and right to the point.</p>
-
-  <div class="chart-wrap">
-    <canvas id="rateChart" aria-label="Historic electricity prices line chart"></canvas>
-
-    <div class="chart-legend">
-      <span class="dot"></span> US Avg Residential (¢/kWh)
-    </div>
-
-    <div class="chart-notes" id="rateNotes"></div>
-  </div>
-
-  <!-- Accessible fallback (shows if canvas isn't supported) -->
-  <details class="chart-fallback">
-    <summary>See key data points</summary>
-    <table>
-      <thead><tr><th>Year</th><th>¢/kWh</th></tr></thead>
-      <tbody id="rateTableBody"></tbody>
-    </table>
-  </details>
-</section>
-
-<!-- ================== Own & Optimize with TaxHive ================== -->
-<section class="partner-link">
-  <h3>VITL / TaxHive Partnership</h3>
-  <p>
-    We’ve partnered with <strong>TaxHive</strong> to maximize your tax savings when going solar.  
-    Watch this short overview here:  
-    <a href="https://vimeo.com/1076213221/33013d8928" target="_blank" class="partner-btn">
-      Watch the TaxHive Partnership Video
-    </a>
-  </p>
-</section>
-<section id="taxhive" class="card taxhive">
-  <div class="taxhive-head">
-    <img src="Assets-taxhive-logo.png" alt="TaxHive" class="taxhive-logo" />
-    <div>
-      <h2 class="section-title">Own & Optimize with TaxHive</h2>
-      <p class="section-kicker">Considering ownership? We coordinate with <strong>TaxHive</strong> so you can capture eligible incentives and file correctly.</p>
-    </div>
-  </div>
-
-  <!-- 3 feature cards -->
-  <div class="taxhive-grid">
-    <article class="tile">
-      <h3>Federal clean energy credit</h3>
-      <p>Eligible homeowners may claim a federal income-tax credit for a portion of qualified solar costs (subject to IRS rules and legislative changes). Credit reduces tax liability, not income.</p>
-    </article>
-    <article class="tile">
-      <h3>Depreciation (for qualifying business use)</h3>
-      <p>If the system serves an income-producing property or qualified business use, accelerated depreciation may apply. TaxHive evaluates eligibility and method (e.g., MACRS / bonus).</p>
-    </article>
-    <article class="tile">
-      <h3>Net-metering revenue</h3>
-      <p>Excess production can offset usage and, where available, earn bill credits or payments from the utility. Program terms vary by utility and state.</p>
-    </article>
-  </div>
-
-  <!-- 4-step row -->
-<h3 class="minhead">How the TaxHive support works</h3>
-<ul class="taxhive-steps">
-  <li><span class="badge">1</span> We scope your system & documentation.</li>
-  <li><span class="badge">2</span> Warm intro to a TaxHive pro (no pressure).</li>
-  <li><span class="badge">3</span> They verify eligibility & prepare filings.</li>
-  <li><span class="badge">4</span> You file with confidence and keep records.</li>
-</ul>
-
-  <!-- FAQ accordion -->
-<div class="taxhive-faq" id="taxhive-faq">
-  <button class="faq-toggle" aria-expanded="false" aria-controls="faq1" id="faq1-btn">
-    WHAT DOES “CREDIT” VS. “DEDUCTION” MEAN?
-  </button>
-  <div id="faq1" class="faq-panel" hidden>
-    <p>
-      A <strong>tax credit</strong> (like the federal clean energy credit) directly reduces the taxes you owe.
-      A <strong>deduction</strong> reduces your taxable income. Many owners combine both:
-      for example, a $30,000 system may get a 30% credit (<em>$9,000 off the tax bill</em>), and
-      <strong>accelerated depreciation</strong> can further reduce taxable income depending on business use.
-      TaxHive coordinates the details so it’s filed correctly.
-    </p>
-  </div>
-
-  <button class="faq-toggle" aria-expanded="false" aria-controls="faq2" id="faq2-btn">
-    CAN I GET “100% WRITE-OFFS”?
-  </button>
-  <div id="faq2" class="faq-panel" hidden>
-    <p>
-     YES, some owners with qualifying home business use as in anything that generates income, stack the Credit, bonus/accelerated depreciation, and
-      eligible expenses and see write-offs that <strong>approach over the full system cost</strong> in the first year.
-      Actual results depend on your basis, usage split, and current rules. TaxHive models
-      your specifics so you know what’s realistic before you file.
-    </p>
-  </div>
-
-  <button class="faq-toggle" aria-expanded="false" aria-controls="faq3" id="faq3-btn">
-    WHAT ABOUT PROGRAM CHANGES?
-  </button>
-  <div id="faq3" class="faq-panel" hidden>
-    <p>
-      Incentives and net-metering policies change. We monitor updates and time filings where possible.
-      If rules change, TaxHive helps you navigate deadlines and document eligibility.
-      (Always confirm with your tax professional; outcomes depend on your return.)
-    </p>
-  </div>
-</div>
+        <button class="faq-toggle" aria-expanded="false" aria-controls="faq3" id="faq3-btn">WHAT ABOUT PROGRAM CHANGES?</button>
+        <div id="faq3" class="faq-panel" hidden>
+          <p>Policies change. TaxHive helps you time filings and document eligibility. Always confirm with your tax professional; outcomes depend on your return.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- ================== Reviews collage ================== -->
     <section class="reviews">
       <h2 class="section-title">What local homeowners are saying</h2>
       <p class="section-kicker">Independent public feedback from real customers.</p>
-
       <div class="reviews-grid">
         <figure class="rev"><img src="review_brad.jpg"    alt="Brad review" /></figure>
         <figure class="rev"><img src="review_tammy.jpg"   alt="Tammy review" /></figure>
@@ -315,116 +197,72 @@
         <figure class="rev"><img src="review_terri.jpg"   alt="Terri review" /></figure>
       </div>
     </section>
-  
-<!-- ============== Electricity Rates (drop-in) START ============== -->
-<section class="card chart-card" id="rates">
-  <h2 class="section-title">Electricity prices keep climbing</h2>
-  <p class="section-kicker">National average residential price (¢/kWh). Clear, readable, and right to the point.</p>
 
-  <div class="chart-wrap">
-    <canvas id="rateChart" aria-label="Historic electricity prices line chart" role="img"></canvas>
-    <div class="chart-legend"><span class="dot"></span> US Avg Residential (¢/kWh)</div>
-    <div class="chart-notes" id="rateNotes"></div>
-  </div>
-
-  <!-- Accessible fallback (if canvas isn’t supported) -->
-  <details class="chart-fallback">
-    <summary>See key data points</summary>
-    <table>
-      <thead><tr><th>Year</th><th>¢/kWh</th></tr></thead>
-      <tbody id="rateTableBody"></tbody>
-    </table>
-  </details>
-</section>
-
-<!-- Minimal inline styles so this works even if style.css is unchanged -->
-<style>
-  #rates .chart-wrap{background:#fff;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.08);padding:16px}
-  #rates canvas{width:100%;height:360px}
-  #rates .chart-legend{margin-top:10px;font-weight:700;color:#2d3a2f}
-  #rates .chart-legend .dot{display:inline-block;width:11px;height:11px;border-radius:50%;background:#2ecc71;margin-right:6px;vertical-align:middle}
-  #rates .chart-notes{margin-top:6px;color:#5b6a60;font-size:.9rem}
-  #rates .chart-fallback summary{cursor:pointer;margin-top:10px}
-  #rates table{border-collapse:collapse;width:100%;margin-top:8px}
-  #rates th,#rates td{padding:8px 10px;border-bottom:1px solid #e7efe9;text-align:left}
-</style>
-
-<!-- Chart.js CDN + init (kept local to this section) -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-(function() {
-  // Years & example national residential prices (¢/kWh).
-  // Update numbers anytime; the table + chart will both reflect it.
-  const labels = [2000, 2005, 2010, 2015, 2020, 2021, 2022, 2023, 2024];
-  const values = [8.3, 9.1, 11.7, 12.7, 13.1, 13.7, 15.1, 15.9, 16.2];
-
-  // Build fallback table
-  const tbody = document.getElementById('rateTableBody');
-  tbody.innerHTML = labels.map((y,i)=>`<tr><td>${y}</td><td>${values[i].toFixed(1)}</td></tr>`).join('');
-
-  // Note text
-  document.getElementById('rateNotes').textContent =
-    'Source: US EIA national average residential electricity price. Most recent year shown.';
-
-  // Render chart (destroy old if hot-replaced)
-  const ctx = document.getElementById('rateChart').getContext('2d');
-  if (window._rateChart) window._rateChart.destroy();
-  window._rateChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [{
-        label: 'US Avg Residential (¢/kWh)',
-        data: values,
-        borderColor: '#2ecc71',
-        backgroundColor: 'rgba(46,204,113,.18)',
-        fill: true,
-        tension: 0.35,
-        pointRadius: 3.5,
-        pointHoverRadius: 6,
-        borderWidth: 3
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => `${ctx.parsed.y.toFixed(1)} ¢/kWh`
-          }
-        }
-      },
-      scales: {
-        x: {
-          title: { display: true, text: 'Year' },
-          grid: { display: false }
-        },
-        y: {
-          title: { display: true, text: '¢/kWh' },
-          suggestedMin: Math.max(0, Math.min(...values) - 2),
-          suggestedMax: Math.max(...values) + 2,
-          ticks: { callback: v => v + '¢' }
-        }
-      }
-    }
-  });
-})();
-</script>
-<!-- ============== Electricity Rates (drop-in) END ============== -->
+    <!-- ============== Electricity Rates (drop-in) ============== -->
+    <section class="card chart-card" id="rates">
+      <h2 class="section-title">Electricity prices keep climbing</h2>
+      <p class="section-kicker">National average residential price (¢/kWh). Clear, readable, and right to the point.</p>
+      <div class="chart-wrap">
+        <canvas id="rateChart" aria-label="Historic electricity prices line chart" role="img"></canvas>
+        <div class="chart-legend"><span class="dot"></span> US Avg Residential (¢/kWh)</div>
+        <div class="chart-notes" id="rateNotes"></div>
+      </div>
+      <details class="chart-fallback">
+        <summary>See key data points</summary>
+        <table>
+          <thead><tr><th>Year</th><th>¢/kWh</th></tr></thead>
+          <tbody id="rateTableBody"></tbody>
+        </table>
+      </details>
+    </section>
 
     <!-- ================== Slides (in order) ================== -->
     <section class="slides">
       <img src="pdf_page_2.png"  alt="Company overview" />
       <img src="pdf_page_3.png"  alt="Installation map" />
       <img src="pdf_page_4.png"  alt="Partners" />
-      <img src="IMG_1234.jpg"  alt="Sponsors" />
+      <img src="IMG_1234.jpg"    alt="Sponsors" />
       <img src="pdf_page_17.png" alt="FAQ" />
-      <img src="IMG_1359.jpeg"  alt="Client install" />
-      <!-- Removed IMG_2445.jpeg per your instruction -->
-      <img src="IMG_6212.jpeg"  alt="Electrical work" />
+      <img src="IMG_1359.jpeg"   alt="Client install" />
+      <img src="IMG_6212.jpeg"   alt="Electrical work" />
       <img src="pdf_page_18.png" alt="Solar in snow" />
       <img src="IMPORTANT_DETAILS.PNG" alt="Program details summary" />
     </section>
 
+  </main>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+
+  <!-- Chart.js CDN + drop-in init (kept local to this page) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+  (function() {
+    const labels = [2000, 2005, 2010, 2015, 2020, 2021, 2022, 2023, 2024];
+    const values = [8.3, 9.1, 11.7, 12.7, 13.1, 13.7, 15.1, 15.9, 16.2];
+    document.getElementById('rateTableBody').innerHTML =
+      labels.map((y,i)=>`<tr><td>${y}</td><td>${values[i].toFixed(1)}</td></tr>`).join('');
+    document.getElementById('rateNotes').textContent =
+      'Source: US EIA national average residential electricity price. Most recent year shown.';
+    const ctx = document.getElementById('rateChart').getContext('2d');
+    if (window._rateChart) window._rateChart.destroy();
+    window._rateChart = new Chart(ctx, {
+      type:'line',
+      data:{ labels, datasets:[{ label:'US Avg Residential (¢/kWh)', data:values,
+        borderColor:'#2ecc71', backgroundColor:'rgba(46,204,113,.18)', fill:true,
+        tension:.35, pointRadius:3.5, pointHoverRadius:6, borderWidth:3 }]},
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:(c)=>`${c.parsed.y.toFixed(1)} ¢/kWh` }}},
+        scales:{ x:{ title:{display:true,text:'Year'}, grid:{display:false} },
+                 y:{ title:{display:true,text:'¢/kWh'},
+                     suggestedMin: Math.max(0, Math.min(...values)-2),
+                     suggestedMax: Math.max(...values)+2,
+                     ticks:{ callback:v=>v+'¢' } } }
+      }
+    });
+  })();
+  </script>
+
+</body>
+</html>
