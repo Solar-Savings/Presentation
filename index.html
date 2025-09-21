@@ -290,6 +290,31 @@
         <figure class="rev"><img src="review_terri.jpg"   alt="Terri review" /></figure>
       </div>
     </section>
+  
+  <!-- ================== Electricity Rates (new chart) ================== -->
+<section class="card chart-card" id="rates">
+  <h2 class="section-title">Electricity prices keep climbing</h2>
+  <p class="section-kicker">
+    National average residential price (¢/kWh). Clear, readable, and right to the point.
+  </p>
+
+  <div class="chart-wrap">
+    <canvas id="rateChart" aria-label="Historic electricity prices line chart" role="img"></canvas>
+    <div class="chart-legend">
+      <span class="dot"></span> US Avg Residential (¢/kWh)
+    </div>
+    <div class="chart-notes" id="rateNotes"></div>
+  </div>
+
+  <!-- Accessible fallback (shows if canvas isn’t supported) -->
+  <details class="chart-fallback">
+    <summary>See key data points</summary>
+    <table>
+      <thead><tr><th>Year</th><th>¢/kWh</th></tr></thead>
+      <tbody id="rateTableBody"></tbody>
+    </table>
+  </details>
+</section>
 
     <!-- ================== Slides (in order) ================== -->
     <section class="slides">
@@ -298,7 +323,6 @@
       <img src="pdf_page_4.png"  alt="Partners" />
       <img src="IMG_1234.jpg"  alt="Sponsors" />
       <img src="pdf_page_14.png" alt="Rate trends" />
-      <img src="pdf_page_15.png" alt="Rate hike news" />
       <img src="IMG_3964.jpeg"  alt="Solar Utility Bills" />
       <img src="pdf_page_17.png" alt="FAQ" />
       <img src="IMG_1359.jpeg"  alt="Client install" />
