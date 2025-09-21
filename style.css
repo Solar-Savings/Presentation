@@ -129,10 +129,43 @@ input[type="number"], select{
   background:#eef6f1; border:1px solid #d6e8df; border-radius:10px; font-weight:600;
 }
 .faq { display:none; padding:10px 12px; background:#fff; border-left:3px solid var(--green); border-radius:8px; }
-
 .taxhive-cta { margin-top:14px; text-align:center; }
 .taxhive-cta .btn { display:inline-block; padding:12px 16px; border-radius:10px; background:var(--green); color:#fff; }
 .taxhive .fine { margin-top:10px; color:var(--muted); font-size:.9rem; }
+/* Accordion FAQ for TaxHive */
+.taxhive-faq {
+  margin-top: 24px;
+}
+
+.faq-toggle {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.faq-btn {
+  width: 100%;
+  padding: 14px;
+  text-align: left;
+  background: #f7f7f7;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.faq-btn:hover {
+  background: #eef6f1;
+}
+
+.faq-content {
+  display: none;
+  padding: 12px 16px;
+  background: #fff;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
 /* Reviews (no cropping; names visible) */
 .reviews{margin-top:28px}
 .section-title{font-size:clamp(22px,5vw,34px);margin:0}
