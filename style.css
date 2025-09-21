@@ -214,6 +214,24 @@ input[type="number"], select{
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(0,0,0,.10);
 }
+.links a {
+  display: inline-block;
+  padding: 10px 16px;
+  margin: 8px;
+  border-radius: 8px;
+  background: #f0f7ff;        /* light blue background */
+  color: #0066cc;             /* strong blue text */
+  font-weight: 600;
+  text-decoration: none;      /* remove underline */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease-in-out;
+}
+
+.links a:hover {
+  background: #0066cc;        /* darker blue on hover */
+  color: #ffffff;             /* white text */
+  transform: translateY(-2px); /* little lift effect */
+}
 /* Slides */
 .slides{margin-top:22px;display:grid;gap:14px}
 .slides img{width:100%;height:auto;border-radius:12px;border:1px solid var(--ring);background:#fff}
