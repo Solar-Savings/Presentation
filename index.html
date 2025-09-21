@@ -316,22 +316,18 @@
       </div>
     </section>
   
-  <!-- ================== Electricity Rates (new chart) ================== -->
+<!-- ============== Electricity Rates (drop-in) START ============== -->
 <section class="card chart-card" id="rates">
   <h2 class="section-title">Electricity prices keep climbing</h2>
-  <p class="section-kicker">
-    National average residential price (¢/kWh). Clear, readable, and right to the point.
-  </p>
+  <p class="section-kicker">National average residential price (¢/kWh). Clear, readable, and right to the point.</p>
 
   <div class="chart-wrap">
     <canvas id="rateChart" aria-label="Historic electricity prices line chart" role="img"></canvas>
-    <div class="chart-legend">
-      <span class="dot"></span> US Avg Residential (¢/kWh)
-    </div>
+    <div class="chart-legend"><span class="dot"></span> US Avg Residential (¢/kWh)</div>
     <div class="chart-notes" id="rateNotes"></div>
   </div>
 
-  <!-- Accessible fallback (shows if canvas isn’t supported) -->
+  <!-- Accessible fallback (if canvas isn’t supported) -->
   <details class="chart-fallback">
     <summary>See key data points</summary>
     <table>
@@ -340,6 +336,83 @@
     </table>
   </details>
 </section>
+
+<!-- Minimal inline styles so this works even if style.css is unchanged -->
+<style>
+  #rates .chart-wrap{background:#fff;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.08);padding:16px}
+  #rates canvas{width:100%;height:360px}
+  #rates .chart-legend{margin-top:10px;font-weight:700;color:#2d3a2f}
+  #rates .chart-legend .dot{display:inline-block;width:11px;height:11px;border-radius:50%;background:#2ecc71;margin-right:6px;vertical-align:middle}
+  #rates .chart-notes{margin-top:6px;color:#5b6a60;font-size:.9rem}
+  #rates .chart-fallback summary{cursor:pointer;margin-top:10px}
+  #rates table{border-collapse:collapse;width:100%;margin-top:8px}
+  #rates th,#rates td{padding:8px 10px;border-bottom:1px solid #e7efe9;text-align:left}
+</style>
+
+<!-- Chart.js CDN + init (kept local to this section) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+(function() {
+  // Years & example national residential prices (¢/kWh).
+  // Update numbers anytime; the table + chart will both reflect it.
+  const labels = [2000, 2005, 2010, 2015, 2020, 2021, 2022, 2023, 2024];
+  const values = [8.3, 9.1, 11.7, 12.7, 13.1, 13.7, 15.1, 15.9, 16.2];
+
+  // Build fallback table
+  const tbody = document.getElementById('rateTableBody');
+  tbody.innerHTML = labels.map((y,i)=>`<tr><td>${y}</td><td>${values[i].toFixed(1)}</td></tr>`).join('');
+
+  // Note text
+  document.getElementById('rateNotes').textContent =
+    'Source: US EIA national average residential electricity price. Most recent year shown.';
+
+  // Render chart (destroy old if hot-replaced)
+  const ctx = document.getElementById('rateChart').getContext('2d');
+  if (window._rateChart) window._rateChart.destroy();
+  window._rateChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'US Avg Residential (¢/kWh)',
+        data: values,
+        borderColor: '#2ecc71',
+        backgroundColor: 'rgba(46,204,113,.18)',
+        fill: true,
+        tension: 0.35,
+        pointRadius: 3.5,
+        pointHoverRadius: 6,
+        borderWidth: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `${ctx.parsed.y.toFixed(1)} ¢/kWh`
+          }
+        }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: 'Year' },
+          grid: { display: false }
+        },
+        y: {
+          title: { display: true, text: '¢/kWh' },
+          suggestedMin: Math.max(0, Math.min(...values) - 2),
+          suggestedMax: Math.max(...values) + 2,
+          ticks: { callback: v => v + '¢' }
+        }
+      }
+    }
+  });
+})();
+</script>
+<!-- ============== Electricity Rates (drop-in) END ============== -->
 
     <!-- ================== Slides (in order) ================== -->
     <section class="slides">
