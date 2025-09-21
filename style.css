@@ -259,3 +259,26 @@ input[type="number"], select{
 .partner-btn:hover {
   background: #128a5b; /* darker green on hover */
 }
+/* Partnership Section */
+.partnership {
+  text-align: center;
+  margin: 28px auto;
+  padding: 20px;
+}
+
+.partnership h2 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.partnership p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.partnership a {
+  color: var(--green); /* keeps your brand colors */
+  font-weight: 600;
+  text-decoration: underline;
+}
