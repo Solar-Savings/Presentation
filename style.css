@@ -230,3 +230,32 @@ input[type="number"], select{
   .span-2,.span-3{grid-column:auto}
   .totals{grid-template-columns:1fr}
 }
+.partner-link {
+  margin: 32px auto;
+  padding: 24px;
+  background: #f4fdf8;
+  border: 2px solid var(--green);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.partner-link h3 {
+  color: var(--green);
+  margin-bottom: 12px;
+}
+
+.partner-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 12px 24px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.partner-btn:hover {
+  background: #128a5b; /* darker green on hover */
+}
