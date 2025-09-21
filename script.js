@@ -79,3 +79,178 @@ document.querySelectorAll('.faq-toggle').forEach(toggle => {
   });
 });
 });
+
+// ===== Electricity Rates chart (no libraries) =====
+(function () {
+  const elCanvas = document.getElementById('rateChart');
+  if (!elCanvas) return;
+
+  // Data: US avg residential price (¢/kWh)
+  // Source hint: EIA annual averages. Values here are practical approximations you can adjust.
+  const DATA = [
+    { y: 2005, v: 9.45 },
+    { y: 2007, v: 10.65 },
+    { y: 2009, v: 11.51 },
+    { y: 2011, v: 12.43 },
+    { y: 2013, v: 12.98 },
+    { y: 2015, v: 12.67 },
+    { y: 2017, v: 12.89 },
+    { y: 2019, v: 13.04 },
+    { y: 2020, v: 13.15 },
+    { y: 2021, v: 13.72 },
+    { y: 2022, v: 15.04 },
+    { y: 2023, v: 15.95 },
+    { y: 2024, v: 16.28 }
+  ];
+
+  // Helper: compute % growth between first and last (and last 10 years)
+  const first = DATA[0], last = DATA[DATA.length - 1];
+  const pct = (last.v / first.v - 1) * 100;
+  const tenStart = DATA.find(d => d.y >= last.y - 10) || DATA[Math.max(0, DATA.length - 11)];
+  const pct10 = (last.v / tenStart.v - 1) * 100;
+
+  // Fallback table rows
+  const tb = document.getElementById('rateTableBody');
+  if (tb) {
+    tb.innerHTML = DATA.map(d => `<tr><td>${d.y}</td><td>${d.v.toFixed(2)}</td></tr>`).join('');
+  }
+  const notes = document.getElementById('rateNotes');
+  if (notes) {
+    notes.innerHTML =
+      `Up <strong>${pct.toFixed(0)}%</strong> since ${first.y} &bull; ` +
+      `<strong>${pct10.toFixed(0)}%</strong> in the last decade`;
+  }
+
+  // Drawing
+  const DPR = Math.max(1, window.devicePixelRatio || 1);
+  const PADDING = { l: 56, r: 18, t: 30, b: 40 };
+
+  function draw() {
+    // Resize canvas for crispness
+    const cssW = elCanvas.clientWidth;
+    const cssH = elCanvas.clientHeight;
+    elCanvas.width = Math.floor(cssW * DPR);
+    elCanvas.height = Math.floor(cssH * DPR);
+
+    const ctx = elCanvas.getContext('2d');
+    ctx.scale(DPR, DPR);
+    ctx.clearRect(0, 0, cssW, cssH);
+
+    const W = cssW - PADDING.l - PADDING.r;
+    const H = cssH - PADDING.t - PADDING.b;
+
+    // Scales
+    const years = DATA.map(d => d.y);
+    const vals = DATA.map(d => d.v);
+    const minY = Math.floor(Math.min(...vals) * 0.9);
+    const maxY = Math.ceil(Math.max(...vals) * 1.05);
+
+    const x = (yr) => {
+      const t = (yr - years[0]) / (years[years.length - 1] - years[0]);
+      return PADDING.l + t * W;
+    };
+    const y = (v) => {
+      const t = (v - minY) / (maxY - minY);
+      return PADDING.t + (1 - t) * H;
+    };
+
+    // Gridlines
+    ctx.strokeStyle = 'rgba(0,0,0,0.08)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    const steps = 6;
+    for (let i = 0; i <= steps; i++) {
+      const gy = PADDING.t + (H / steps) * i;
+      ctx.beginPath();
+      ctx.moveTo(PADDING.l, gy);
+      ctx.lineTo(cssW - PADDING.r, gy);
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    // Axes
+    ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+    ctx.lineWidth = 1.25;
+    ctx.beginPath();
+    ctx.moveTo(PADDING.l, PADDING.t);
+    ctx.lineTo(PADDING.l, cssH - PADDING.b);
+    ctx.lineTo(cssW - PADDING.r, cssH - PADDING.b);
+    ctx.stroke();
+
+    // Y-axis labels
+    ctx.fillStyle = '#3a4a5c';
+    ctx.font = '12px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    for (let i = 0; i <= steps; i++) {
+      const vv = minY + ((maxY - minY) / steps) * i;
+      const gy = PADDING.t + (H / steps) * (steps - i);
+      ctx.fillText(vv.toFixed(0) + '¢', PADDING.l - 8, gy);
+    }
+
+    // X-axis labels (every 2–3 ticks)
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    const stride = Math.ceil(years.length / 6);
+    years.forEach((yr, idx) => {
+      if (idx % stride === 0 || idx === years.length - 1) {
+        ctx.fillText(yr, x(yr), cssH - PADDING.b + 8);
+      }
+    });
+
+    // Line
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = '#0b74da';
+    ctx.fillStyle = 'rgba(11,116,218,0.12)';
+    ctx.beginPath();
+    DATA.forEach((d, i) => {
+      const px = x(d.y), py = y(d.v);
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    });
+    ctx.stroke();
+
+    // Area under line (nice drama)
+    ctx.lineTo(x(last.y), y(minY));
+    ctx.lineTo(x(first.y), y(minY));
+    ctx.closePath();
+    ctx.fill();
+
+    // Points + labels on first, 2020, last
+    const labelYears = [first.y, 2020, last.y].filter((v, i, a) => a.indexOf(v) === i);
+    ctx.fillStyle = '#0b74da';
+    labelYears.forEach(yr => {
+      const d = DATA.find(p => p.y === yr) || DATA.reduce((prev, cur) =>
+        Math.abs(cur.y - yr) < Math.abs(prev.y - yr) ? cur : prev
+      );
+      const px = x(d.y), py = y(d.v);
+      // dot
+      ctx.beginPath();
+      ctx.arc(px, py, 3.5, 0, Math.PI * 2);
+      ctx.fill();
+      // label
+      const box = `${d.y}: ${d.v.toFixed(2)}¢`;
+      ctx.fillStyle = '#16324c';
+      ctx.font = '600 12px system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText(box, px + 6, py - 6);
+      ctx.fillStyle = '#0b74da';
+    });
+
+    // Callout box (total % and last 10 yrs %)
+    const blurb = `Total ↑ ${pct.toFixed(0)}% since ${first.y} · ↑ ${pct10.toFixed(0)}% in last 10 yrs`;
+    const bx = PADDING.l + 10, by = PADDING.t + 10;
+    ctx.font = '600 13px system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif';
+    const bw = ctx.measureText(blurb).width + 16, bh = 28;
+    ctx.fillStyle = 'rgba(22, 50, 76, 0.9)';
+    ctx.fillRect(bx, by, bw, bh);
+    ctx.fillStyle = '#fff';
+    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.fillText(blurb, bx + 8, by + bh / 2);
+  }
+
+  // Draw now + on resize
+  draw();
+  window.addEventListener('resize', draw, { passive: true });
+})();
