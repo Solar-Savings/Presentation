@@ -254,3 +254,56 @@ document.querySelectorAll('.faq-toggle').forEach(toggle => {
   draw();
   window.addEventListener('resize', draw, { passive: true });
 })();
+// ===== Electricity Rates Chart =====
+document.addEventListener('DOMContentLoaded', () => {
+  const ctx = document.getElementById('rateChart');
+  if (!ctx) return;
+
+  // Example national average price data
+  const years = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+  const prices = [12.4, 12.7, 12.9, 13.1, 13.3, 13.5, 13.7, 14.3, 15.1, 15.8];
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [{
+        label: '¢/kWh',
+        data: prices,
+        borderColor: '#ff5722',
+        backgroundColor: 'rgba(255,87,34,0.2)',
+        fill: true,
+        tension: 0.3,
+        pointBackgroundColor: '#ff5722',
+        pointRadius: 5
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => ctx.raw.toFixed(2) + ' ¢/kWh'
+          }
+        }
+      },
+      scales: {
+        x: { title: { display: true, text: 'Year' } },
+        y: { title: { display: true, text: '¢/kWh' } }
+      }
+    }
+  });
+
+  // Table data
+  const tableBody = document.getElementById('rateTableBody');
+  prices.forEach((p, i) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td>${years[i]}</td><td>${p.toFixed(2)}</td>`;
+    tableBody.appendChild(row);
+  });
+
+  // Notes
+  document.getElementById('rateNotes').innerText =
+    'Data: U.S. Energy Information Administration (EIA) – illustrative example.';
+});
