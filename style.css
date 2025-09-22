@@ -163,3 +163,15 @@ input[type="number"], select{width:100%;padding:13px 12px;border:1px solid var(-
 #rates .chart-fallback summary{cursor:pointer;margin-top:10px}
 #rates .chart-fallback table{border-collapse:collapse;width:100%;margin-top:8px}
 #rates .chart-fallback th,#rates .chart-fallback td{padding:8px 10px;border-bottom:1px solid #e7efe9;text-align:left}
+/* Section spacing */
+section {
+  margin-bottom: 40px;   /* space below every section */
+}
+
+.chart-card {
+  margin-bottom: 50px;   /* extra breathing room below the chart */
+}
+
+.slides {
+  margin-top: 30px;      /* space above the slides section */
+}
