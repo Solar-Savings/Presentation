@@ -84,7 +84,30 @@ document.addEventListener('DOMContentLoaded', () => {
   yearsRange.addEventListener('input', recalc);
   solarEscSelect.addEventListener('change', recalc);
   runBtn.addEventListener('click', recalc);
+// --- TaxHive FAQ accordion ---
+document.querySelectorAll('.faq-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.getAttribute('aria-controls');
+    const panel = document.getElementById(id);
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
 
+    // Close any other open item (keep this if you want one-at-a-time behavior)
+    document.querySelectorAll('.faq-toggle[aria-expanded="true"]').forEach(openBtn => {
+      if (openBtn !== btn) {
+        openBtn.setAttribute('aria-expanded', 'false');
+        const openPanel = document.getElementById(openBtn.getAttribute('aria-controls'));
+        openPanel && openPanel.setAttribute('hidden', '');
+      }
+    });
+
+    // Toggle this one
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    if (panel) {
+      isOpen ? panel.setAttribute('hidden', '')
+             : panel.removeAttribute('hidden');
+    }
+  });
+});
   // First paint
   recalc();
 });
