@@ -213,3 +213,33 @@ section {
     max-width: 80%;
   }
 }
+/* tighten spacing after the chart card */
+.chart-card { margin-bottom: 14px; }
+
+/* make the chart legend + source lighter and smaller on mobile */
+.chart-legend { margin-top: 8px; }
+.chart-notes { margin-top: 4px; font-size: .9rem; color: #667a71; }
+
+/* keep the facts+map card snug and aligned */
+#facts-map { margin-top: 12px; }
+.about-two figure { margin: 0; }              /* remove default figure margin */
+.about-two .bullets { margin-top: 2px; }      /* pull bullets a touch closer */
+
+/* consistent vertical rhythm for every card that follows a card */
+.card + .card { margin-top: 18px; }
+
+/* headline above your Maine map, centered and compact */
+.media.center h4.minihead { 
+  text-align: center; 
+  margin: 0 0 10px; 
+  color: #2c463d; 
+  font-weight: 800; 
+}
+
+/* if you show two map images side-by-side */
+.media.grid-2 { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+.media.grid-2 img { height: 260px; object-fit: cover; }
+@media (max-width: 720px){
+  .media.grid-2 { grid-template-columns: 1fr; }
+  .media.grid-2 img { height: 220px; }
+}
