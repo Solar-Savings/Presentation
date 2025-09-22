@@ -165,6 +165,40 @@ input[type="number"], select{
   background: #fff;
   font-size: 0.95rem;
   line-height: 1.5;
+  /* --- Fix TaxHive header layout on mobile --- */
+.taxhive-head{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;                 /* allow wrapping on small screens */
+}
+
+.taxhive-logo{
+  display:block;
+  width:180px;                    /* comfortable default */
+  max-width:45%;                  /* don’t hog the row */
+  height:auto;
+  object-fit:contain;
+  flex:0 0 auto;                  /* don’t stretch */
+}
+
+.taxhive-head > div{
+  flex:1 1 280px;                 /* text area can shrink/wrap */
+  min-width:220px;
+}
+
+/* Stack vertically & center on narrow screens */
+@media (max-width: 640px){
+  .taxhive-head{
+    flex-direction:column;        /* logo on top, text below */
+    text-align:center;
+  }
+  .taxhive-logo{
+    width:200px;
+    max-width:70%;
+    margin:0 auto;
+  }
+}
 }
 /* PPA programs card */
 .programs .bullets{margin:10px 0 6px 18px}
