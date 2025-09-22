@@ -151,3 +151,15 @@ input[type="number"], select{width:100%;padding:13px 12px;border:1px solid var(-
   .span-2,.span-3{grid-column:auto}
   .totals{grid-template-columns:1fr}
 }
+/* --- Chart sizing hard-stop (prevents “infinite growth”) --- */
+#rates .chart-wrap { position: relative; background:#fff; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,.08); padding:16px; }
+#rateChart { display:block; width:100% !important; height:380px !important; max-height:380px; }
+
+/* Optional: make the legend/dots match your brand */
+#rates .chart-legend{margin-top:10px;font-weight:700;color:var(--muted)}
+#rates .chart-legend .dot{display:inline-block;width:11px;height:11px;border-radius:50%;background:#2ecc71;margin-right:6px;vertical-align:middle}
+
+/* Tiny accessibility/fallback table polish */
+#rates .chart-fallback summary{cursor:pointer;margin-top:10px}
+#rates .chart-fallback table{border-collapse:collapse;width:100%;margin-top:8px}
+#rates .chart-fallback th,#rates .chart-fallback td{padding:8px 10px;border-bottom:1px solid #e7efe9;text-align:left}
