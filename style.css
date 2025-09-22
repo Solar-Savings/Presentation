@@ -8,10 +8,10 @@
   --ring:#dce9e3;
 }
 
-/* Base */
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
 img{max-width:100%;display:block}
+
 .container{width:min(1100px,92vw);margin-inline:auto}
 
 /* Hero */
@@ -27,20 +27,40 @@ img{max-width:100%;display:block}
 .card-lite{background:#fff;border-radius:14px;padding:16px;box-shadow:0 6px 16px rgba(0,0,0,.06)}
 
 /* Form layout */
-.form-grid{display:grid;gap:16px;grid-template-columns:repeat(3,1fr);align-items:end}
+.form-grid{
+  display:grid;gap:16px;
+  grid-template-columns: repeat(3, 1fr);
+  align-items:end;
+}
 .field label{display:block;font-weight:700;margin-bottom:6px}
-input[type="number"],select{width:100%;padding:13px 12px;border:1px solid var(--ring);border-radius:12px;background:#fff;color:var(--ink);font-size:16px}
+input[type="number"], select{
+  width:100%;padding:13px 12px;border:1px solid var(--ring);
+  border-radius:12px;background:#fff;color:var(--ink);font-size:16px;
+}
 
-/* Slider */
+/* Slider: big & contained */
 .range-wrap{width:100%;padding:0 14px}
-#yearsRange{width:100%;max-width:100%;height:40px;appearance:none;background:transparent;margin:0;box-sizing:border-box}
+#yearsRange{
+  width:100%;max-width:100%;height:40px;
+  appearance:none;background:transparent;margin:0;box-sizing:border-box;
+}
 #yearsRange::-webkit-slider-runnable-track{height:14px;background:var(--ring);border-radius:10px}
-#yearsRange::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;margin-top:-10px;width:32px;height:32px;border-radius:50%;border:none;background:var(--green);box-shadow:0 2px 6px rgba(0,0,0,.22);cursor:pointer}
+#yearsRange::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;margin-top:-10px;
+  width:32px;height:32px;border-radius:50%;border:none;background:var(--green);
+  box-shadow:0 2px 6px rgba(0,0,0,.22);cursor:pointer
+}
 #yearsRange::-moz-range-track{height:14px;background:var(--ring);border-radius:10px}
-#yearsRange::-moz-range-thumb{width:32px;height:32px;border-radius:50%;border:none;background:var(--green);box-shadow:0 2px 6px rgba(0,0,0,.22);cursor:pointer}
+#yearsRange::-moz-range-thumb{
+  width:32px;height:32px;border-radius:50%;border:none;background:var(--green);
+  box-shadow:0 2px 6px rgba(0,0,0,.22);cursor:pointer
+}
 
-/* Buttons */
-.btn{width:100%;background:var(--green);color:#fff;padding:14px 16px;border:none;border-radius:12px;font-weight:800;letter-spacing:.3px;cursor:pointer}
+/* Button */
+.btn{
+  width:100%;background:var(--green);color:#fff;padding:14px 16px;border:none;border-radius:12px;
+  font-weight:800;letter-spacing:.3px;cursor:pointer
+}
 .btn:hover{filter:brightness(.97)}
 .actions{margin-top:4px}
 .span-2{grid-column:span 2}
@@ -62,70 +82,122 @@ input[type="number"],select{width:100%;padding:13px 12px;border:1px solid var(--
 .row .label{color:var(--muted);font-weight:600}
 .row .value{font-weight:800}
 
-/* ---------------- TaxHive (ownership optimization) ---------------- */
-.taxhive{margin-top:26px}
-.taxhive-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.taxhive-logo{display:block;width:200px;max-width:40%;height:auto;object-fit:contain;flex:0 0 auto}
-.taxhive-head>div{flex:1 1 320px;min-width:240px}
+/* ============ TaxHive (ownership optimization) ============ */
+.taxhive { margin-top: 26px; }
+.taxhive-head { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.taxhive-badge { width:72px; height:auto; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,.08); }
 
-@media (max-width:640px){
-  .taxhive-head{flex-direction:column;text-align:center}
-  .taxhive-logo{width:220px;max-width:80%;margin:0 auto}
+.taxhive-grid {
+  display:grid;
+  gap:16px;
+  margin-top:14px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.taxhive .tile {
+  background:#fff;
+  border:1px solid #e7ece9;
+  border-radius:12px;
+  padding:14px 16px;
+}
+.taxhive .tile h3 { margin:0 0 6px 0; font-size: clamp(16px, 2.7vw, 18px); }
+
+.taxhive-steps { margin-top:10px; }
+.taxhive-steps .subhead { margin:0 0 8px 0; font-size: clamp(16px, 2.7vw, 18px); }
+.taxhive-steps .steps {
+  list-style:none; padding:0; margin:0;
+  display:grid; gap:10px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.taxhive-steps .steps li {
+  background:#f4f8f6; border:1px dashed #cfe0d8; border-radius:12px; padding:12px;
+  display:flex; gap:10px; align-items:flex-start;
+}
+.taxhive-steps .steps li span {
+  display:inline-grid; place-items:center; width:26px; height:26px;
+  border-radius:50%; background:var(--green); color:#fff; font-weight:700;
 }
 
-.taxhive-grid{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.taxhive .tile{background:#fff;border:1px solid #e7ece9;border-radius:12px;padding:14px 16px}
-.taxhive .tile h3{margin:0 0 6px 0;font-size:clamp(16px,2.7vw,18px)}
+.taxhive-faq { margin-top:12px; }
+.faq-toggle {
+  width:100%; text-align:left; padding:12px 14px; margin:8px 0;
+  background:#eef6f1; border:1px solid #d6e8df; border-radius:10px; font-weight:600;
+}
+.faq { display:none; padding:10px 12px; background:#fff; border-left:3px solid var(--green); border-radius:8px; }
+.taxhive-cta { margin-top:14px; text-align:center; }
+.taxhive-cta .btn { display:inline-block; padding:12px 16px; border-radius:10px; background:var(--green); color:#fff; }
+.taxhive .fine { margin-top:10px; color:var(--muted); font-size:.9rem; }
 
-.taxhive-steps{margin-top:10px;list-style:none;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.taxhive-steps li{background:#f4f8f6;border:1px dashed #cfe0d8;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:flex-start}
-.taxhive-steps .badge{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;font-weight:700}
-
-/* Accordion FAQ for TaxHive (matches: .faq-toggle + .faq-panel[hidden]) */
-.taxhive-faq{margin-top:24px}
-.faq-toggle{width:100%;text-align:left;padding:12px 14px;margin:8px 0;background:#eef6f1;border:1px solid #d6e8df;border-radius:10px;font-weight:600}
-.faq-panel{padding:12px 16px;background:#fff;border-left:3px solid var(--green);border-radius:8px}
-.faq-panel[hidden]{display:none}
+/* Accordion FAQ for TaxHive */
+.faq-btn {
+  width: 100%;
+  padding: 14px;
+  text-align: left;
+  background: #f7f7f7;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.faq-btn:hover { background: #eef6f1; }
+.faq-content { display: none; padding: 12px 16px; background: #fff; font-size: 0.95rem; line-height: 1.5; }
 
 /* PPA programs card */
 .programs .bullets{margin:10px 0 6px 18px}
 .programs .bullets li{margin:6px 0}
 .programs .cta-row{margin-top:12px}
-.btn-lite{background:#e8f2ec;color:var(--green);border:none;border-radius:10px;padding:10px 14px;font-weight:700;display:inline-block}
 
-/* ---------------- Reviews ---------------- */
+/* subtle secondary button */
+.btn-lite{
+  background:#e8f2ec;color:var(--green);border:none;
+  border-radius:10px;padding:10px 14px;font-weight:700;display:inline-block;
+}
+
+/* Reviews */
 .reviews{margin-top:28px}
 .section-title{font-size:clamp(22px,5vw,34px);margin:0}
 .section-kicker{margin:6px 0 16px;color:var(--muted)}
-.reviews-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));justify-content:center;text-align:center}
+.reviews-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  justify-content: center;
+  text-align: center;
+}
 .rev{margin:0;background:#0f0f0f;border-radius:14px;padding:10px;box-shadow:0 8px 26px rgba(0,0,0,.18)}
 .rev img{width:100%;height:auto;border-radius:10px;object-fit:contain;background:#000}
 
-/* ---------------- Links section ---------------- */
-.links.card{padding:20px;margin:28px auto}
-.link-list{list-style:none;padding:0;margin:14px 0 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 18px}
-.link-list li{display:flex;align-items:center}
-.link-list a{display:inline-block;padding:10px 12px;border-radius:10px;background:#ffffff;box-shadow:0 1px 3px rgba(0,0,0,.06);text-decoration:none;color:#0f3d2e;transition:transform .06s ease,box-shadow .12s ease}
-.link-list a:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(0,0,0,.10)}
-.links a{display:inline-block;padding:10px 16px;margin:8px;border-radius:8px;background:#f0f7ff;color:#0066cc;font-weight:600;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,.08);transition:all .2s ease-in-out}
-.links a:hover{background:#0066cc;color:#fff;transform:translateY(-2px)}
+/* Links section */
+.links.card {
+  padding: 20px;
+  margin: 28px auto;
+}
 
-/* ---------------- Electricity Rates chart ---------------- */
-.chart-card{margin-top:24px}
-.chart-wrap{position:relative;width:100%;margin:40px auto;padding:20px;background:#fff;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.08);max-width:900px}
-.chart-wrap canvas{width:100% !important;height:380px !important;display:block;margin-bottom:20px}
-.chart-legend{display:inline-flex;align-items:center;gap:8px;margin-top:10px;color:var(--muted);font-weight:600}
-.chart-legend .dot{width:12px;height:12px;border-radius:50%;background:#0b74da;display:inline-block}
-.chart-notes{margin-top:8px;color:var(--muted);font-size:.95rem}
-.chart-fallback summary{cursor:pointer;margin-top:10px}
-.chart-fallback table{width:100%;border-collapse:collapse;margin-top:10px;font-variant-numeric:tabular-nums}
-.chart-fallback th,.chart-fallback td{border-bottom:1px solid #e8eef5;padding:6px 8px;text-align:left}
-
-/* ---------------- Partner link block ---------------- */
-.partner-link{margin:32px auto;padding:24px;background:#f4fdf8;border:2px solid var(--green);border-radius:12px;text-align:center}
-.partner-link h3{color:var(--green);margin-bottom:12px}
-.partner-btn{display:inline-block;margin-top:12px;padding:12px 24px;background:var(--green);color:#fff;font-weight:600;text-decoration:none;border-radius:8px;transition:background .3s ease}
-.partner-btn:hover{background:#128a5b}
+/* Compact chip-style links */
+.link-chips{
+  list-style:none;
+  padding:0;
+  margin:14px 0 0 0;
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:10px 12px;
+}
+.link-chips li{ display:block }
+.link-chips a{
+  display:flex;align-items:center;justify-content:center;
+  padding:9px 12px;border-radius:999px;
+  background:#f0f7ff;color:#0a57b4;
+  text-decoration:none;font-weight:700;font-size:.95rem;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  transition:transform .08s ease, box-shadow .12s ease, background .2s;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.link-chips a:hover{
+  background:#0a57b4;color:#fff;
+  transform:translateY(-1px);box-shadow:0 6px 14px rgba(10,87,180,.18);
+}
+#more-links.card{ padding:16px 16px 18px; }
+#more-links .section-title{ margin-bottom:6px; }
+#more-links .section-kicker{ margin:0 0 10px 0; }
 
 /* Slides */
 .slides{margin-top:22px;display:grid;gap:14px}
@@ -138,7 +210,7 @@ input[type="number"],select{width:100%;padding:13px 12px;border:1px solid var(--
 .disclaimer .fine{color:#3f5c52;font-style:italic;margin:8px 0 0}
 
 /* Responsive */
-@media (max-width:860px){
+@media (max-width: 860px){
   .form-grid{grid-template-columns:1fr}
   .span-2,.span-3{grid-column:auto}
   .totals{grid-template-columns:1fr}
