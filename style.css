@@ -243,3 +243,48 @@ section {
   .media.grid-2 { grid-template-columns: 1fr; }
   .media.grid-2 img { height: 220px; }
 }
+/* Always hide [hidden] panels */
+[hidden]{ display:none !important; }
+
+/* Clickable blue “chips” */
+.faq-toggle{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 14px;
+  margin:10px 0;
+  border:1px solid #d6e8df;
+  border-radius:10px;
+  background:#eaf3ff;        /* light blue */
+  color:#0a57b4;              /* strong blue text */
+  font-weight:800;
+  letter-spacing:.2px;
+  cursor:pointer;
+  transition:background .2s ease, box-shadow .2s ease;
+}
+.faq-toggle:hover{
+  background:#dcecff;
+  box-shadow:0 6px 14px rgba(10,87,180,.14);
+}
+
+/* Chevron rotates when open */
+.faq-toggle .chev{
+  font-weight:900;
+  transform:rotate(0deg);
+  transition:transform .18s ease;
+}
+.faq-toggle[aria-expanded="true"] .chev{
+  transform:rotate(90deg);
+}
+
+/* Answer body */
+.faq-content{
+  padding:12px 14px;
+  background:#fff;
+  border-left:3px solid var(--green);
+  border-radius:8px;
+  color:var(--ink);
+  line-height:1.55;
+}
