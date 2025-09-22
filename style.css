@@ -123,7 +123,18 @@ input[type="number"], select{width:100%;padding:13px 12px;border:1px solid var(-
 .chart-fallback summary{cursor:pointer;margin-top:10px}
 .chart-fallback table{width:100%;border-collapse:collapse;margin-top:10px;font-variant-numeric:tabular-nums}
 .chart-fallback th,.chart-fallback td{border-bottom:1px solid #e8eef5;padding:6px 8px;text-align:left}
+/* Chart sizing: wrapper owns the height; canvas just fills it */
+#rateChartWrap{
+  position: relative;
+  height: 380px;       /* fixed drawing height; tweak if you want */
+  min-height: 380px;   /* safety */
+}
 
+#rateChart{
+  display:block;
+  width:100% !important;
+  height:100% !important;  /* fill wrapper; Chart.js won't fight this */
+}
 /* ===== Slides ===== */
 .slides{margin-top:22px;display:grid;gap:14px}
 .slides img{width:100%;height:auto;border-radius:12px;border:1px solid var(--ring);background:#fff}
