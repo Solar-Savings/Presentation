@@ -211,73 +211,149 @@
       </div>
     </section>
 
-    <!-- ===== Electricity Rates (Chart.js) ===== -->
-    <section class="card chart-card" id="rates">
-      <h2 class="section-title">Electricity prices keep climbing</h2>
-      <p class="section-kicker">National average residential price (¢/kWh). Clear, readable, and right to the point.</p>
-      <div class="chart-wrap">
-        <canvas id="rateChart" aria-label="Historic electricity prices line chart" role="img"></canvas>
-        <div class="chart-legend"><span class="dot"></span> US Avg Residential (¢/kWh)</div>
-        <div class="chart-notes" id="rateNotes"></div>
-      </div>
-      <details class="chart-fallback">
-        <summary>See key data points</summary>
-        <table>
-          <thead><tr><th>Year</th><th>¢/kWh</th></tr></thead>
-          <tbody id="rateTableBody"></tbody>
-        </table>
-      </details>
-    </section>
+<!-- ===== Electricity Rates (Chart.js) ===== -->
+<section class="card chart-card" id="rates">
+  <h2 class="section-title">Electricity prices keep climbing</h2>
+  <p class="section-kicker">National average residential price (¢/kWh). Clear, readable, and right to the point.</p>
 
-    <!-- ===== Slides ===== -->
-    <section class="slides">
-      <img src="pdf_page_2.png"  alt="Company overview" />
-      <img src="pdf_page_3.png"  alt="Installation map" />
-      <img src="pdf_page_4.png"  alt="Partners" />
-      <img src="IMG_1234.jpg"    alt="Sponsors" />
-      <img src="pdf_page_17.png" alt="FAQ" />
-      <img src="IMG_1359.jpeg"   alt="Client install" />
-      <img src="IMG_6212.jpeg"   alt="Electrical work" />
-      <img src="pdf_page_18.png" alt="Solar in snow" />
-      <img src="IMPORTANT_DETAILS.PNG" alt="Program details summary" />
-    </section>
+  <div class="chart-wrap" id="rateChartWrap" aria-busy="true">
+    <canvas id="rateChart" aria-label="Historic electricity prices line chart" role="img"></canvas>
 
-  </main>
+    <div class="chart-legend">
+      <span class="dot"></span> US Avg Residential (¢/kWh)
+    </div>
 
-  <!-- ===== Scripts ===== -->
-  <script src="script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    // Keep simple, readable national price series
-    (function(){
-      const labels = [2000, 2005, 2010, 2015, 2020, 2021, 2022, 2023, 2024];
-      const values = [8.3, 9.1, 11.7, 12.7, 13.1, 13.7, 15.1, 15.9, 16.2];
+    <div class="chart-notes" id="rateNotes"></div>
+  </div>
 
-      const tb = document.getElementById('rateTableBody');
-      if (tb) tb.innerHTML = labels.map((y,i)=>`<tr><td>${y}</td><td>${values[i].toFixed(1)}</td></tr>`).join('');
-      const notes = document.getElementById('rateNotes');
-      if (notes) notes.textContent = 'Source: US EIA national average residential electricity price. Most recent year shown.';
+  <details class="chart-fallback">
+    <summary>See key data points</summary>
+    <table>
+      <thead><tr><th>Year</th><th>¢/kWh</th></tr></thead>
+      <tbody id="rateTableBody"></tbody>
+    </table>
+  </details>
+</section>
 
-      const ctx = document.getElementById('rateChart')?.getContext('2d');
-      if (!ctx) return;
-      if (window._rateChart) window._rateChart.destroy();
-      window._rateChart = new Chart(ctx, {
-        type:'line',
-        data:{ labels, datasets:[{ label:'US Avg Residential (¢/kWh)', data:values,
-          borderColor:'#2ecc71', backgroundColor:'rgba(46,204,113,.18)', fill:true,
-          tension:.35, pointRadius:3.5, pointHoverRadius:6, borderWidth:3 }]},
-        options:{
-          responsive:true, maintainAspectRatio:false,
-          plugins:{ legend:{display:false},
-            tooltip:{ callbacks:{ label:(c)=>`${c.parsed.y.toFixed(1)} ¢/kWh` }}},
-          scales:{ x:{ title:{display:true,text:'Year'}, grid:{display:false} },
-                   y:{ title:{display:true,text:'¢/kWh'},
-                       suggestedMin: Math.max(0, Math.min(...values)-2),
-                       suggestedMax: Math.max(...values)+2,
-                       ticks:{ callback:v=>v+'¢' } } }
+<!-- ===== Slides (lazy) ===== -->
+<section class="slides">
+  <img src="pdf_page_2.png"  alt="Company overview" loading="lazy" />
+  <img src="pdf_page_3.png"  alt="Installation map" loading="lazy" />
+  <img src="pdf_page_4.png"  alt="Partners" loading="lazy" />
+  <img src="IMG_1234.jpg"    alt="Sponsors" loading="lazy" />
+  <img src="pdf_page_17.png" alt="FAQ" loading="lazy" />
+  <img src="IMG_1359.jpeg"   alt="Client install" loading="lazy" />
+  <img src="IMG_6212.jpeg"   alt="Electrical work" loading="lazy" />
+  <img src="pdf_page_18.png" alt="Solar in snow" loading="lazy" />
+  <img src="IMPORTANT_DETAILS.PNG" alt="Program details summary" loading="lazy" />
+</section>
+
+</main>
+
+<!-- ===== Scripts ===== -->
+<script src="script.js" defer></script>
+
+<script>
+/* ---------- Chart loader that won't fail silently ---------- */
+(function() {
+  const labels = [2000, 2005, 2010, 2015, 2020, 2021, 2022, 2023, 2024];
+  const values = [8.3, 9.1, 11.7, 12.7, 13.1, 13.7, 15.1, 15.9, 16.2];
+
+  // Fill the fallback table & notes immediately
+  (function seedFallback(){
+    const tb = document.getElementById('rateTableBody');
+    if (tb) tb.innerHTML = labels.map((y,i)=>`<tr><td>${y}</td><td>${values[i].toFixed(1)}</td></tr>`).join('');
+    const notes = document.getElementById('rateNotes');
+    if (notes) notes.textContent = 'Source: US EIA national average residential electricity price. Most recent year shown.';
+  })();
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = src; s.async = true;
+      s.onload = resolve;
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  async function ensureChartJS() {
+    if (window.Chart) return;
+    try {
+      await loadScript('https://cdn.jsdelivr.net/npm/chart.js');
+    } catch(e) {
+      // one quick retry (temporary network hiccup)
+      await new Promise(r => setTimeout(r, 400));
+      await loadScript('https://cdn.jsdelivr.net/npm/chart.js');
+    }
+  }
+
+  function renderChart() {
+    const wrap = document.getElementById('rateChartWrap');
+    const canvas = document.getElementById('rateChart');
+    if (!canvas || !canvas.getContext) return;
+
+    const ctx = canvas.getContext('2d');
+    if (window._rateChart) window._rateChart.destroy();
+
+    window._rateChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'US Avg Residential (¢/kWh)',
+          data: values,
+          borderColor: '#2ecc71',
+          backgroundColor: 'rgba(46,204,113,.18)',
+          fill: true,
+          tension: 0.35,
+          pointRadius: 3.5,
+          pointHoverRadius: 6,
+          borderWidth: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: { label: c => `${c.parsed.y.toFixed(1)} ¢/kWh` }
+          }
+        },
+        scales: {
+          x: { title: { display: true, text: 'Year' }, grid: { display: false } },
+          y: {
+            title: { display: true, text: '¢/kWh' },
+            suggestedMin: Math.max(0, Math.min(...values) - 2),
+            suggestedMax: Math.max(...values) + 2,
+            ticks: { callback: v => v + '¢' }
+          }
         }
-      });
-    })();
-  </script>
+      }
+    });
+
+    if (wrap) wrap.setAttribute('aria-busy', 'false');
+  }
+
+  // Only load Chart.js when the chart is near viewport (reduces jank)
+  const target = document.getElementById('rates');
+  if (!target) return;
+
+  const start = async () => { await ensureChartJS(); renderChart(); };
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some(e => e.isIntersecting)) { io.disconnect(); start(); }
+    }, { rootMargin: '200px' });
+    io.observe(target);
+  } else {
+    // older browsers: just run after load
+    window.addEventListener('load', start, { once: true });
+  }
+})();
+</script>
+
 </body>
 </html>
+
