@@ -175,3 +175,41 @@ section {
 .slides {
   margin-top: 30px;      /* space above the slides section */
 }
+/* ================== Company Info Layout ================== */
+.company-info {
+  display: grid;
+  gap: 20px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.company-info__text ul {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.6;
+}
+
+.company-info__map img,
+.company-info__photo img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+/* Responsive grid for company info */
+@media (min-width: 768px) {
+  .company-info {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+  .company-info__photo {
+    grid-column: span 2;
+    text-align: center;
+  }
+  .company-info__photo img {
+    max-width: 80%;
+  }
+}
