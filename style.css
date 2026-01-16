@@ -318,3 +318,27 @@ section {
   padding: 8px;
   border-radius: 10px;
 }
+/* FORCE hero logos to fit on mobile */
+header.hero .hero__logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+header.hero .hero__logos img.utility-logo {
+  width: auto;
+  max-width: 110px;
+  height: auto;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+@media (max-width: 480px) {
+  header.hero .hero__logos img.utility-logo {
+    max-width: 90px;
+  }
+}
