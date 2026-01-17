@@ -289,56 +289,33 @@ section {
   line-height:1.55;
 }
 
-/* ===== Hero utility logos: mobile fix ===== */
+/* ===== Hero utility logos (clean + mobile-perfect) ===== */
 
 .hero__logos {
   display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
   margin-top: 16px;
 }
 
-.utility-logo {
-  max-width: 110px;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* iPhone / small screens */
-@media (max-width: 480px) {
-  .utility-logo {
-    max-width: 90px;
-  }
-}
-.utility-logo {
-  background: #ffffff;
-  padding: 9px;
-  border-radius: 11px;
-}
-/* FORCE hero logos to fit on mobile */
-header.hero .hero__logos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-}
-
-header.hero .hero__logos img.utility-logo {
-  width: auto;
-  max-width: 110px;
-  height: auto;
+.hero__logos .utility-logo {
+  width: 140px;
+  height: 90px;
   object-fit: contain;
   background: #ffffff;
-  padding: 9px;
-  border-radius: 11px;
+  padding: 10px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  display: block;
 }
 
 @media (max-width: 480px) {
-  header.hero .hero__logos img.utility-logo {
-    max-width: 90px;
+  .hero__logos .utility-logo {
+    width: 96px;
+    height: 56px;
+    padding: 8px;
+    border-radius: 10px;
   }
 }
