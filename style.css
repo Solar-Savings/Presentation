@@ -315,8 +315,8 @@ section {
 }
 .utility-logo {
   background: #ffffff;
-  padding: 8px;
-  border-radius: 10px;
+  padding: 9px;
+  border-radius: 11px;
 }
 /* FORCE hero logos to fit on mobile */
 header.hero .hero__logos {
@@ -333,8 +333,8 @@ header.hero .hero__logos img.utility-logo {
   height: auto;
   object-fit: contain;
   background: #ffffff;
-  padding: 8px;
-  border-radius: 10px;
+  padding: 9px;
+  border-radius: 11px;
 }
 
 @media (max-width: 480px) {
