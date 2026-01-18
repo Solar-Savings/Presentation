@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const years  = Math.max(1, Math.min(30, parseInt(yearsRange.value || '25', 10)));
 
     const utilEsc = parseFloat(utilityEscInput.value || '0.09') || 0.09; // fixed 9%
-    const solEsc  = parseFloat(solarEscSelect.value || '0.0359') || 0.0359;
+    const solEsc = Number(solarEscSelect.value);
 
     // Totals
     const utilTotal  = sumSeries(bill,  utilEsc, years);
