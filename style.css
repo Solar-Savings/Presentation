@@ -217,7 +217,7 @@ section {
     text-align: center;
   }
   .company-info__photo img {
-    max-width: 80%;
+    max-width: 100%;
   }
 }
 /* tighten spacing after the chart card */
