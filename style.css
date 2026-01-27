@@ -326,3 +326,15 @@ section {
     border-radius: 10px;
   }
 }
+#more-links {
+  text-align: center;
+}
+
+#more-links .section-title,
+#more-links .section-kicker {
+  text-align: center;
+}
+
+#more-links .link-chips {
+  justify-content: center;
+}
