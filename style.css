@@ -408,3 +408,17 @@ section {
   padding: 10px 16px;
   box-shadow: 0 8px 20px rgba(0,0,0,.18);
 }
+/* HERO BACKGROUND IMAGE OVERRIDE */
+.hero {
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,.35),
+      rgba(0,0,0,.55)
+    ),
+    url("./IMG_5881.jpeg");
+
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  min-height: 520px;
+}
