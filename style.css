@@ -359,7 +359,7 @@ section {
     linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.55)),
     url("./IMG_5881.jpeg");
   background-size: cover;
-  background-position: center;
+  background-position: center 20%;
   background-repeat: no-repeat;
 }
 
